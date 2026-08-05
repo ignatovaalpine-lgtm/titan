@@ -160,7 +160,7 @@
       .hero-image {
         position: absolute;
         inset: 0;
-        background: url("assets/image-1.png") center/cover no-repeat;
+        background: url("assets/image-01-e90c879a9c81.png") center/cover no-repeat;
         transform: scale(1.035);
         animation: heroZoom 12s ease-out forwards;
       }
@@ -487,29 +487,84 @@
       }
       .collection-tabs {
         display: flex;
-        gap: 30px;
-        margin: 50px 0 28px;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin: 50px 0 32px;
+        padding: 0 0 14px;
         border-bottom: 1px solid var(--line);
       }
       .collection-tabs button {
-        border: 0;
-        background: transparent;
-        padding: 0 0 15px;
-        color: #6f777e;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.018));
+        padding: 18px 26px;
+        min-height: 72px;
+        border-radius: 16px;
+        color: #8b949b;
         cursor: pointer;
-        font-size: 13px;
+        font-size: 39px;
+        line-height: 1;
+        letter-spacing: -0.045em;
+        font-weight: 300;
         position: relative;
+        transition: transform .25s ease, border-color .25s ease, background .25s ease, color .25s ease, box-shadow .25s ease;
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.015), 0 10px 24px rgba(0,0,0,0.14);
+      }
+      .collection-tabs button:before {
+        content: "Коллекция";
+        position: absolute;
+        left: 26px;
+        top: 9px;
+        font-size: 10px;
+        line-height: 1;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.34);
+        pointer-events: none;
+      }
+      .collection-tabs button:hover {
+        color: #eef3f6;
+        border-color: rgba(68, 217, 223, 0.38);
+        background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(68,217,223,0.04));
+        transform: translateY(-2px);
+        box-shadow: inset 0 0 0 1px rgba(68,217,223,0.08), 0 16px 34px rgba(0,0,0,0.2);
       }
       .collection-tabs button.active {
         color: #fff;
+        border-color: rgba(68, 217, 223, 0.55);
+        background: linear-gradient(180deg, rgba(68,217,223,0.12), rgba(255,255,255,0.045));
+        box-shadow: inset 0 0 0 1px rgba(68,217,223,0.16), 0 0 0 1px rgba(68,217,223,0.08), 0 16px 34px rgba(0,0,0,0.22);
       }
       .collection-tabs button.active:after {
         content: "";
         position: absolute;
-        height: 1px;
-        inset: auto 0 -1px;
-        background: var(--aqua);
+        left: 18px;
+        right: 18px;
+        bottom: 8px;
+        height: 3px;
+        border-radius: 999px;
+        background: linear-gradient(90deg, rgba(68,217,223,0.15), var(--aqua), rgba(68,217,223,0.15));
+        box-shadow: 0 0 16px rgba(68, 217, 223, 0.34);
       }
+
+      @media (max-width: 900px) {
+        .collection-tabs {
+          gap: 10px;
+          margin: 34px 0 24px;
+          padding-bottom: 12px;
+        }
+        .collection-tabs button {
+          font-size: 24px;
+          min-height: 58px;
+          padding: 16px 18px 14px;
+          border-radius: 14px;
+        }
+        .collection-tabs button:before {
+          left: 18px;
+          top: 8px;
+          font-size: 9px;
+        }
+      }
+
       .collection-stage {
         height: min(72vw, 720px);
         min-height: 560px;
@@ -995,7 +1050,7 @@
           transform: none;
         }
       }
-    :root{--titan-mountain:url('assets/image-2.png')}
+    :root{--titan-mountain:url('assets/image-02-f87f41ec3f42.png')}
 </style>
     <style>
       .titan-hero {
@@ -2185,7 +2240,7 @@
         display: block;
         width: 100%;
         height: auto;
-        mix-blend-mode: screen;
+        mix-blend-mode: normal;
         filter: contrast(1.04) brightness(0.96)
           drop-shadow(0 12px 15px rgba(0, 0, 0, 0.86));
       }
@@ -3358,6 +3413,1004 @@
         font-size: clamp(32.3px, 4.9555vw, 79.05px);
       }
 </style>
+
+    <style id="hero-layout-user-tweaks">
+      /* Правки по комментариям: поднять подписи ближе к ТИТАН,
+         увеличить правые карточки на 20% и сделать их на 20% прозрачнее,
+         увеличить шрифт верхнего меню на 20% */
+      .titan-hero.has-image .hero-brand-copy {
+        top: 30%;
+      }
+      .titan-hero.has-image .hero-material {
+        margin-top: clamp(6px, 0.7vw, 12px) !important;
+      }
+      .titan-hero.has-image .hero-install-copy {
+        margin: clamp(6px, 0.55vw, 10px) 7.5% 0 !important;
+      }
+      .titan-hero.has-image .hero-variants {
+        margin-top: clamp(12px, 1.1vw, 18px) !important;
+      }
+      .titan-hero.has-image .hero-spec-right {
+        transform: scale(1.2);
+        transform-origin: top right;
+      }
+      .titan-hero.has-image .hero-spec-right > div {
+        background: linear-gradient(135deg, rgba(232, 235, 238, 0.088), rgba(182, 188, 194, 0.036)) !important;
+        border-color: rgba(255, 255, 255, 0.104) !important;
+      }
+      .titan-hero.has-image .hero-spec-right div:nth-child(2):after {
+        transform: scale(1.2);
+        transform-origin: center;
+      }
+      .nav {
+        font-size: 14.4px;
+      }
+      @media (max-width: 900px) {
+        .titan-hero.has-image .hero-brand-copy {
+          top: 34%;
+        }
+        .titan-hero.has-image .hero-spec-right {
+          transform: none;
+        }
+        .nav {
+          font-size: 12px;
+        }
+      }
+    </style>
+
+    <style id="hero-red-block-closer-only">
+      /* Подтянуть красный блок прямо под надпись ТИТАН */
+      .titan-hero.has-image .hero-material {
+        margin-top: clamp(-58px, -4.4vw, -22px) !important;
+      }
+      .titan-hero.has-image .hero-install-copy {
+        margin-top: clamp(6px, 0.55vw, 10px) !important;
+      }
+      .titan-hero.has-image .hero-variants {
+        margin-top: clamp(10px, 0.9vw, 16px) !important;
+      }
+      @media (max-width: 900px) {
+        .titan-hero.has-image .hero-material {
+          margin-top: -12px !important;
+        }
+        .titan-hero.has-image .hero-install-copy {
+          margin-top: 6px !important;
+        }
+        .titan-hero.has-image .hero-variants {
+          margin-top: 10px !important;
+        }
+      }
+    </style>
+
+    <style id="hero-title-bigger-mobile-order">
+      /* Увеличить надпись ТИТАН на 15% */
+      .titan-hero.has-image .hero-brand-copy h1.has-rendered-title {
+        width: 97.75% !important;
+        max-width: 100%;
+      }
+
+      /* Мобильная версия: сначала ТИТАН, затем «Каменно-полимерная плитка SPC» */
+      @media (max-width: 900px) {
+        .titan-hero.has-image .hero-brand-copy {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          width: min(88vw, 560px);
+        }
+        .titan-hero.has-image .hero-brand-copy h1.has-rendered-title {
+          order: 1;
+          width: 100% !important;
+        }
+        .titan-hero.has-image .hero-material {
+          order: 2;
+          width: 100% !important;
+          margin-top: 10px !important;
+        }
+        .titan-hero.has-image .hero-install-copy {
+          order: 3;
+          margin: 6px 0 0 !important;
+          text-align: left;
+        }
+        .titan-hero.has-image .hero-variants {
+          order: 4;
+          margin-top: 10px !important;
+        }
+      }
+    </style>
+
+    <style id="mobile-hero-reorder-cards-after-install">
+      @media (max-width: 900px) {
+        .titan-hero.has-image {
+          min-height: 980px;
+        }
+        .titan-hero.has-image .hero-brand-copy {
+          top: 18%;
+          left: 24px;
+          width: calc(100vw - 48px);
+          transform: none;
+          z-index: 10;
+          display: block;
+        }
+        .titan-hero.has-image .hero-brand-copy h1.has-rendered-title {
+          width: min(86vw, 390px) !important;
+          max-width: 100%;
+          margin: 0;
+        }
+        .titan-hero.has-image .hero-material {
+          width: min(86vw, 360px) !important;
+          margin-top: 8px !important;
+          order: initial;
+        }
+        .titan-hero.has-image .hero-install-copy {
+          width: min(72vw, 280px);
+          margin: 8px 0 0 !important;
+          text-align: left;
+          order: initial;
+        }
+        .titan-hero.has-image .hero-spec-right {
+          left: 24px;
+          right: 24px;
+          top: 54%;
+          width: auto !important;
+          transform: none !important;
+          z-index: 10;
+          gap: 10px;
+        }
+        .titan-hero.has-image .hero-spec-right > div {
+          padding: 12px 15px;
+        }
+        .titan-hero.has-image .hero-variants {
+          position: absolute;
+          left: 0;
+          top: calc(100% + 250px);
+          margin-top: 0 !important;
+          flex-wrap: wrap;
+          gap: 14px 22px;
+          width: min(86vw, 360px);
+        }
+      }
+    </style>
+
+    <style id="mobile-title-higher-and-content-closer">
+      @media (max-width: 900px) {
+        /* 1. ТИТАН выше примерно на 20% */
+        .titan-hero.has-image .hero-brand-copy {
+          top: 12% !important;
+          left: 24px !important;
+          width: calc(100vw - 48px) !important;
+        }
+
+        /* 2. Всё остальное сразу под надписью */
+        .titan-hero.has-image .hero-material {
+          width: min(84vw, 360px) !important;
+          margin-top: 6px !important;
+        }
+        .titan-hero.has-image .hero-install-copy {
+          width: min(74vw, 280px) !important;
+          margin: 6px 0 0 !important;
+          text-align: left !important;
+        }
+        .titan-hero.has-image .hero-spec-right {
+          top: 40% !important;
+          left: 24px !important;
+          right: 24px !important;
+          width: auto !important;
+          gap: 10px !important;
+          transform: none !important;
+        }
+        .titan-hero.has-image .hero-spec-right > div {
+          margin: 0 !important;
+        }
+
+        /* Варианты коллекции — ниже карточек */
+        .titan-hero.has-image .hero-variants {
+          left: 0 !important;
+          top: calc(100% + 200px) !important;
+          width: min(84vw, 360px) !important;
+          margin-top: 0 !important;
+        }
+      }
+    </style>
+
+    <style id="mobile-1cm-spacing-from-title">
+      @media (max-width: 900px) {
+        .titan-hero.has-image {
+          position: relative;
+          min-height: 1100px;
+        }
+        .titan-hero.has-image .hero-brand-copy {
+          top: 12% !important;
+          left: 24px !important;
+          width: calc(100vw - 48px) !important;
+          transform: none !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          gap: 1cm !important;
+        }
+        .titan-hero.has-image .hero-brand-copy h1.has-rendered-title {
+          width: min(84vw, 360px) !important;
+          max-width: 100% !important;
+          margin: 0 !important;
+        }
+        .titan-hero.has-image .hero-material {
+          width: min(84vw, 360px) !important;
+          margin: 0 !important;
+        }
+        .titan-hero.has-image .hero-install-copy {
+          width: min(74vw, 280px) !important;
+          margin: 0 !important;
+          text-align: left !important;
+        }
+        .titan-hero.has-image .hero-spec-right {
+          left: 24px !important;
+          right: 24px !important;
+          width: auto !important;
+          transform: none !important;
+          gap: 10px !important;
+        }
+        .titan-hero.has-image .hero-variants {
+          position: absolute !important;
+          left: 24px !important;
+          width: min(84vw, 360px) !important;
+          margin-top: 0 !important;
+          flex-wrap: wrap;
+          gap: 14px 22px;
+        }
+      }
+    </style>
+
+    <style id="mobile-blue-block-up-red-line">
+      @media (max-width: 900px) {
+        /* Оставляем ТИТАН на текущем месте, поднимаем синий блок ближе к красной линии */
+        .titan-hero.has-image .hero-brand-copy {
+          top: 12% !important;
+          gap: 0 !important;
+        }
+        .titan-hero.has-image .hero-brand-copy h1.has-rendered-title {
+          margin: 0 !important;
+        }
+        .titan-hero.has-image .hero-material {
+          margin-top: 10px !important;
+          width: min(84vw, 360px) !important;
+        }
+        .titan-hero.has-image .hero-install-copy {
+          margin-top: 4px !important;
+          width: min(74vw, 280px) !important;
+          text-align: left !important;
+        }
+      }
+    </style>
+
+    <style id="mobile-correct-order-final">
+      @media (max-width: 900px) {
+        .titan-hero.has-image {
+          position: relative;
+          min-height: 1120px !important;
+        }
+        /* 1) ТИТАН  2) Каменно-полимерная плитка  3) Укладка возможна */
+        .titan-hero.has-image .hero-brand-copy {
+          top: 30% !important;
+          left: 22px !important;
+          width: calc(100vw - 44px) !important;
+          transform: none !important;
+          display: flex !important;
+          flex-direction: column !important;
+          align-items: flex-start !important;
+          gap: 8px !important;
+          z-index: 12 !important;
+        }
+        .titan-hero.has-image .hero-brand-copy h1.has-rendered-title {
+          order: 1 !important;
+          width: min(82vw, 380px) !important;
+          max-width: 100% !important;
+          margin: 0 !important;
+        }
+        .titan-hero.has-image .hero-material {
+          order: 2 !important;
+          width: min(82vw, 360px) !important;
+          margin: 0 !important;
+        }
+        .titan-hero.has-image .hero-install-copy {
+          order: 3 !important;
+          width: min(72vw, 270px) !important;
+          margin: 0 !important;
+          text-align: left !important;
+        }
+        /* 4) Далее карточки преимуществ */
+        .titan-hero.has-image .hero-spec-right {
+          left: 22px !important;
+          right: 22px !important;
+          width: auto !important;
+          transform: none !important;
+          z-index: 12 !important;
+          gap: 10px !important;
+        }
+        .titan-hero.has-image .hero-spec-right > div {
+          margin: 0 !important;
+        }
+        /* Варианты коллекции оставляем ниже карточек */
+        .titan-hero.has-image .hero-variants {
+          position: absolute !important;
+          left: 22px !important;
+          width: min(82vw, 360px) !important;
+          margin: 0 !important;
+          flex-wrap: wrap;
+          gap: 14px 22px;
+          z-index: 12 !important;
+        }
+      }
+    </style>
+
+    <style id="spec-strip-animation-styles">
+      .spec-strip-animated .spec {
+        position: relative;
+        overflow: hidden;
+      }
+      .spec-faska strong,
+      .spec-fire strong {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .paint-stroke {
+        display: inline-block;
+        width: clamp(58px, 6vw, 110px);
+        height: clamp(28px, 2.8vw, 54px);
+        margin-left: clamp(12px, 1.2vw, 20px);
+        vertical-align: middle;
+        opacity: 0;
+        transform: scaleX(0) rotate(-3deg);
+        transform-origin: left center;
+        background: url("assets/image-03-4e3257059057.png") center / contain no-repeat;
+        filter: none;
+      }
+      .spec-faska.is-animated .paint-stroke {
+        animation: paintStrokeReveal .9s .25s cubic-bezier(.2,.8,.2,1) forwards;
+      }
+      .no-fire-icon {
+        display: inline-flex;
+        width: clamp(38px, 3.8vw, 62px);
+        height: clamp(38px, 3.8vw, 62px);
+        margin-left: clamp(12px, 1.2vw, 20px);
+        vertical-align: middle;
+        color: rgba(255,255,255,.92);
+        opacity: 0;
+        transform: scale(.45) rotate(-12deg);
+        filter: blur(6px);
+      }
+      .no-fire-icon svg { width: 100%; height: 100%; }
+      .no-fire-icon img { width: 100%; height: 100%; display: block; object-fit: contain; }
+      .spec-fire.is-animated .no-fire-icon {
+        animation: fireIconReveal .75s .35s cubic-bezier(.16,.76,.25,1) forwards;
+      }
+      @keyframes paintStrokeReveal {
+        0% { opacity: 0; transform: scaleX(0) rotate(-3deg); }
+        60% { opacity: 1; transform: scaleX(1.06) rotate(-2deg); }
+        100% { opacity: .95; transform: scaleX(1) rotate(-2deg); }
+      }
+      @keyframes fireIconReveal {
+        0% { opacity: 0; transform: scale(.45) rotate(-12deg); filter: blur(6px); }
+        70% { opacity: 1; transform: scale(1.08) rotate(2deg); filter: blur(0); }
+        100% { opacity: 1; transform: scale(1) rotate(0); filter: blur(0); }
+      }
+      @media (max-width: 900px) {
+        .paint-stroke { width: 66px; height: 32px; margin-left: 10px; }
+        .no-fire-icon { width: 40px; height: 40px; margin-left: 10px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .paint-stroke, .no-fire-icon { opacity: 1; transform: none; filter: none; animation: none !important; }
+      }
+    </style>
+
+    <style id="faska-label-under-number">
+      /* «Окрашенная фаска» одной строкой под 4V, как «Тёплый пол» под 42°C */
+      .spec-faska > span {
+        display: block !important;
+        width: 100%;
+        margin-top: 12px;
+        white-space: nowrap;
+      }
+    </style>
+
+    <style id="titan8-decors-tab-styles">
+      .collection-stage.has-decor-grid {
+        height: auto;
+        min-height: 0;
+        overflow: visible;
+        background: transparent;
+      }
+      .slide.titan8-decor-slide {
+        position: relative;
+        inset: auto;
+        opacity: 0;
+        transform: translateY(16px);
+        pointer-events: none;
+        display: none;
+        padding: clamp(28px, 4vw, 58px);
+        background:
+          radial-gradient(circle at 78% 12%, rgba(68,217,223,.08), transparent 34%),
+          linear-gradient(180deg, #0a0b0d, #070809);
+        border: 1px solid rgba(255,255,255,.08);
+      }
+      .slide.titan8-decor-slide.active {
+        display: block;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+      }
+      .titan8-decor-head {
+        display: flex;
+        justify-content: space-between;
+        gap: 30px;
+        align-items: end;
+        margin-bottom: 34px;
+      }
+      .titan8-decor-head small {
+        display: block;
+        color: #6f7b82;
+        text-transform: uppercase;
+        letter-spacing: .16em;
+        margin-bottom: 10px;
+        font-size: 10px;
+      }
+      .titan8-decor-head h3 {
+        margin: 0;
+        font-size: clamp(42px, 5.3vw, 82px);
+        font-weight: 300;
+        letter-spacing: -.06em;
+        line-height: .92;
+      }
+      .titan8-decor-head p {
+        margin: 0;
+        max-width: 440px;
+        color: #8c969d;
+        line-height: 1.65;
+        font-size: 13px;
+      }
+      .titan8-decor-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 22px 18px;
+      }
+      .titan8-decor-card {
+        margin: 0;
+        padding: 12px;
+        border: 1px solid rgba(255,255,255,.08);
+        background: linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
+        transition: transform .25s ease, border-color .25s ease, background .25s ease;
+      }
+      .titan8-decor-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(68,217,223,.32);
+        background: linear-gradient(180deg, rgba(255,255,255,.055), rgba(68,217,223,.025));
+      }
+      .titan8-decor-card img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 2 / 3;
+        object-fit: cover;
+        background: #151515;
+      }
+      .titan8-decor-card figcaption {
+        padding: 12px 2px 2px;
+      }
+      .titan8-decor-card strong {
+        display: block;
+        color: #f3f5f6;
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: .02em;
+      }
+      .titan8-decor-card span {
+        display: block;
+        color: #758089;
+        margin-top: 4px;
+        font-size: 11px;
+        letter-spacing: .05em;
+      }
+      .titan8-decor-actions {
+        margin-top: 34px;
+        display: flex;
+        justify-content: flex-end;
+      }
+      .titan8-detail-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 24px;
+        padding: 17px 22px;
+        border: 1px solid rgba(68,217,223,.34);
+        color: #eff7f8;
+        background: rgba(68,217,223,.035);
+        font-size: 13px;
+        letter-spacing: .04em;
+        transition: .25s ease;
+      }
+      .titan8-detail-link:hover {
+        transform: translateY(-2px);
+        border-color: rgba(68,217,223,.7);
+        background: rgba(68,217,223,.08);
+      }
+      .titan8-detail-link b { color: var(--aqua); font-size: 18px; }
+      .collection-stage:not(.has-decor-grid) .slide:not(.titan8-decor-slide) { display: block; }
+      @media (max-width: 1000px) {
+        .titan8-decor-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      }
+      @media (max-width: 700px) {
+        .titan8-decor-head { display: block; }
+        .titan8-decor-head p { margin-top: 18px; }
+        .titan8-decor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+        .slide.titan8-decor-slide { padding: 22px 16px; }
+        .titan8-decor-actions { justify-content: stretch; }
+        .titan8-detail-link { width: 100%; justify-content: space-between; }
+      }
+    </style>
+
+    <style id="titan8-one-screen-animated-grid">
+      /* Компактная раскладка: все 11 декоров помещаются в один экран */
+      @media (min-width: 1001px) {
+        .collections {
+          padding-top: clamp(52px, 5vh, 78px);
+          padding-bottom: clamp(36px, 4vh, 58px);
+        }
+        .collections > .reveal:first-child {
+          display: grid;
+          grid-template-columns: auto 1fr;
+          align-items: end;
+          column-gap: 30px;
+        }
+        .collections > .reveal:first-child .section-label {
+          margin-bottom: 8px;
+        }
+        .collections > .reveal:first-child .title {
+          margin: 0;
+          font-size: clamp(40px, 4.2vw, 66px);
+          line-height: .9;
+        }
+        .collection-tabs {
+          margin: 24px 0 18px;
+        }
+        .slide.titan8-decor-slide {
+          padding: clamp(18px, 2vw, 28px);
+        }
+        .titan8-decor-head {
+          margin-bottom: 16px;
+          align-items: center;
+        }
+        .titan8-decor-head h3 {
+          font-size: clamp(30px, 3.1vw, 48px);
+        }
+        .titan8-decor-head p {
+          max-width: 380px;
+          font-size: 11px;
+          line-height: 1.45;
+        }
+        .titan8-decor-grid {
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          gap: 12px;
+        }
+        .titan8-decor-card {
+          padding: 7px;
+          min-width: 0;
+        }
+        .titan8-decor-card img {
+          aspect-ratio: 4 / 5;
+        }
+        .titan8-decor-card figcaption {
+          padding: 7px 1px 1px;
+        }
+        .titan8-decor-card strong {
+          font-size: 12px;
+          line-height: 1.05;
+        }
+        .titan8-decor-card span {
+          margin-top: 3px;
+          font-size: 9px;
+        }
+        .titan8-decor-actions {
+          margin-top: 16px;
+        }
+        .titan8-detail-link {
+          padding: 12px 17px;
+          font-size: 11px;
+        }
+      }
+
+      /* Анимированное последовательное появление карточек */
+      .titan8-decor-slide.active .titan8-decor-card {
+        opacity: 0;
+        transform: translateY(22px) scale(.96);
+        filter: blur(5px);
+        animation: titan8DecorCardIn .62s cubic-bezier(.16,.76,.25,1) forwards;
+      }
+      .titan8-decor-slide.active .titan8-decor-card:nth-child(1) { animation-delay: .06s; }
+      .titan8-decor-slide.active .titan8-decor-card:nth-child(2) { animation-delay: .12s; }
+      .titan8-decor-slide.active .titan8-decor-card:nth-child(3) { animation-delay: .18s; }
+      .titan8-decor-slide.active .titan8-decor-card:nth-child(4) { animation-delay: .24s; }
+      .titan8-decor-slide.active .titan8-decor-card:nth-child(5) { animation-delay: .30s; }
+      .titan8-decor-slide.active .titan8-decor-card:nth-child(6) { animation-delay: .36s; }
+      .titan8-decor-slide.active .titan8-decor-card:nth-child(7) { animation-delay: .42s; }
+      .titan8-decor-slide.active .titan8-decor-card:nth-child(8) { animation-delay: .48s; }
+      .titan8-decor-slide.active .titan8-decor-card:nth-child(9) { animation-delay: .54s; }
+      .titan8-decor-slide.active .titan8-decor-card:nth-child(10) { animation-delay: .60s; }
+      .titan8-decor-slide.active .titan8-decor-card:nth-child(11) { animation-delay: .66s; }
+      .titan8-decor-slide.active .titan8-decor-head {
+        animation: titan8DecorHeadIn .55s ease-out both;
+      }
+      .titan8-decor-slide.active .titan8-decor-actions {
+        opacity: 0;
+        transform: translateY(12px);
+        animation: titan8DecorActionIn .55s .72s ease-out forwards;
+      }
+      @keyframes titan8DecorCardIn {
+        to { opacity: 1; transform: none; filter: blur(0); }
+      }
+      @keyframes titan8DecorHeadIn {
+        from { opacity: 0; transform: translateY(12px); }
+        to { opacity: 1; transform: none; }
+      }
+      @keyframes titan8DecorActionIn {
+        to { opacity: 1; transform: none; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .titan8-decor-slide.active .titan8-decor-card,
+        .titan8-decor-slide.active .titan8-decor-head,
+        .titan8-decor-slide.active .titan8-decor-actions {
+          animation: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+          filter: none !important;
+        }
+      }
+    </style>
+
+    <style id="titan8-force-six-columns">
+      /* Жёстко фиксируем 6 карточек в первом ряду и 5 во втором */
+      @media (min-width: 701px) {
+        .titan8-decor-grid {
+          grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+          gap: 10px !important;
+        }
+        .titan8-decor-card {
+          padding: 6px !important;
+          min-width: 0 !important;
+        }
+        .titan8-decor-card img {
+          aspect-ratio: 4 / 5 !important;
+        }
+        .titan8-decor-card figcaption {
+          padding: 6px 1px 1px !important;
+        }
+        .titan8-decor-card strong {
+          font-size: 11px !important;
+        }
+        .titan8-decor-card span {
+          font-size: 8px !important;
+        }
+      }
+      @media (max-width: 700px) {
+        .titan8-decor-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        }
+      }
+    </style>
+
+    <style id="titan8-smaller-reference-captions">
+      /* Ещё более компактные панно и подписи в стиле референса */
+      @media (min-width: 701px) {
+        .slide.titan8-decor-slide {
+          padding: clamp(14px, 1.6vw, 22px) !important;
+        }
+        .titan8-decor-head {
+          margin-bottom: 12px !important;
+        }
+        .titan8-decor-grid {
+          grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+          column-gap: 12px !important;
+          row-gap: 16px !important;
+          align-items: start;
+        }
+        .titan8-decor-card {
+          width: 100%;
+          max-width: 128px;
+          justify-self: center;
+          padding: 0 !important;
+          border: 0 !important;
+          background: transparent !important;
+          box-shadow: none !important;
+        }
+        .titan8-decor-card:hover {
+          transform: translateY(-4px) !important;
+          background: transparent !important;
+        }
+        .titan8-decor-card img {
+          width: 100% !important;
+          aspect-ratio: 2 / 3 !important;
+          object-fit: cover;
+          border: 1px solid rgba(255,255,255,.08);
+        }
+        .titan8-decor-card figcaption {
+          padding: 7px 0 0 !important;
+          text-align: center;
+        }
+        .titan8-decor-card strong {
+          display: inline-block !important;
+          color: #fff !important;
+          font-size: 12px !important;
+          line-height: 1.05 !important;
+          font-weight: 600 !important;
+          letter-spacing: .01em !important;
+          text-transform: uppercase;
+          text-decoration: underline;
+          text-decoration-thickness: 1px;
+          text-underline-offset: 4px;
+        }
+        .titan8-decor-card span {
+          display: block !important;
+          margin-top: 7px !important;
+          color: #fff !important;
+          font-size: 11px !important;
+          line-height: 1 !important;
+          font-weight: 500 !important;
+          letter-spacing: .015em !important;
+          white-space: nowrap;
+        }
+        .titan8-decor-actions {
+          margin-top: 12px !important;
+        }
+      }
+      @media (min-width: 1400px) {
+        .titan8-decor-card { max-width: 138px; }
+      }
+      @media (max-width: 700px) {
+        .titan8-decor-card figcaption { text-align: center; }
+        .titan8-decor-card strong {
+          display: inline-block;
+          text-transform: uppercase;
+          text-decoration: underline;
+          text-underline-offset: 4px;
+        }
+        .titan8-decor-card span {
+          color: #fff;
+          font-weight: 500;
+        }
+      }
+    </style>
+
+    <style id="titan8-decors-rounded-no-darkening">
+      .collection-stage.has-decor-grid {
+        background: transparent !important;
+      }
+      .slide.titan8-decor-slide {
+        background: transparent !important;
+        border: 0 !important;
+        box-shadow: none !important;
+      }
+      .slide.titan8-decor-slide:after {
+        display: none !important;
+        content: none !important;
+      }
+      .titan8-decor-card {
+        border: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+      }
+      .titan8-decor-card:hover {
+        background: transparent !important;
+        border-color: transparent !important;
+      }
+      .titan8-decor-card img {
+        border-radius: 10px !important;
+      }
+      .titan8-decor-card figcaption {
+        background: transparent !important;
+      }
+    </style>
+
+    <style id="collection-heading-swapped-style">
+      .collection-heading {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        gap: clamp(34px, 5vw, 90px);
+      }
+      .collection-heading .title {
+        margin: 0;
+      }
+      .collection-heading-label {
+        margin: 0 0 10px;
+        white-space: nowrap;
+      }
+      @media (max-width: 900px) {
+        .collection-heading {
+          align-items: flex-end;
+          gap: 20px;
+        }
+        .collection-heading-label {
+          margin-bottom: 6px;
+        }
+      }
+      @media (max-width: 560px) {
+        .collection-heading {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 18px;
+        }
+        .collection-heading-label {
+          margin: 0;
+        }
+      }
+    </style>
+
+    <style id="titan-decors-title-smaller-no-duplicate">
+      .titan8-decor-head h3 {
+        font-size: clamp(21px, 2.65vw, 41px) !important;
+        line-height: 1.04 !important;
+        max-width: 1180px;
+      }
+      .titan8-decor-head p {
+        display: none !important;
+      }
+    </style>
+
+    <style id="titan-decors-title-1_5x-smaller">
+      .titan8-decor-head h3 {
+        font-size: clamp(14px, 1.76vw, 27px) !important;
+        line-height: 1.08 !important;
+        max-width: 1180px;
+      }
+    </style>
+
+    <style id="rooms-gallery-infinite-loop">
+      /* Бесконечное непрерывное движение галереи с прежней скоростью */
+      #roomMarquee {
+        animation: roomsMarqueeInfinite 30s linear infinite !important;
+        animation-play-state: running !important;
+        will-change: transform;
+        backface-visibility: hidden;
+      }
+      #roomMarquee:hover {
+        animation-play-state: running !important;
+      }
+      @keyframes roomsMarqueeInfinite {
+        from { transform: translate3d(0, 0, 0); }
+        to { transform: translate3d(calc(-50% - 8px), 0, 0); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #roomMarquee {
+          animation: roomsMarqueeInfinite 30s linear infinite !important;
+        }
+      }
+    </style>
+
+    <style id="rooms-gallery-hover-pause-final">
+      #roomMarquee {
+        animation: roomsMarqueeInfinite 30s linear infinite !important;
+        animation-play-state: running !important;
+      }
+      #roomMarquee:hover {
+        animation-play-state: paused !important;
+      }
+    </style>
+
+    <style id="rooms-description-text-2x">
+      .rooms-head p {
+        font-size: 24px !important;
+        max-width: 720px !important;
+      }
+      @media (max-width: 900px) {
+        .rooms-head p {
+          font-size: 18px !important;
+          max-width: 100% !important;
+        }
+      }
+    </style>
+
+    <style id="rooms-description-thinner-font">
+      .rooms-head p {
+        font-weight: 200 !important;
+      }
+    </style>
+
+    <style id="section-labels-3x">
+      /* Все малые подписи вида TITAN TECHNOLOGY увеличены в 3 раза */
+      .section-label {
+        gap: 30px !important;
+        font-size: 27px !important;
+        letter-spacing: 0.2em !important;
+        margin-bottom: 36px !important;
+      }
+      .section-label:before {
+        width: 102px !important;
+        height: 2px !important;
+      }
+      @media (max-width: 900px) {
+        .section-label {
+          gap: 18px !important;
+          font-size: 18px !important;
+          margin-bottom: 24px !important;
+        }
+        .section-label:before {
+          width: 60px !important;
+        }
+      }
+    </style>
+
+    <style id="section-labels-30-percent-smaller">
+      .section-label {
+        gap: 21px !important;
+        font-size: 18.9px !important;
+        margin-bottom: 25.2px !important;
+      }
+      .section-label:before {
+        width: 71.4px !important;
+      }
+      @media (max-width: 900px) {
+        .section-label {
+          gap: 12.6px !important;
+          font-size: 12.6px !important;
+          margin-bottom: 16.8px !important;
+        }
+        .section-label:before {
+          width: 42px !important;
+        }
+      }
+    </style>
+
+    <style id="calculator-fonts-3x">
+      .calc-panel label {
+        font-size: 27px !important;
+        gap: 18px !important;
+        letter-spacing: 0.08em !important;
+      }
+      .calc-panel input,
+      .calc-panel select {
+        font-size: 42px !important;
+        line-height: 1.1 !important;
+        padding: 26px 20px !important;
+        min-height: 92px;
+      }
+      .field-row {
+        gap: 18px !important;
+        margin-top: 18px !important;
+      }
+      @media (max-width: 900px) {
+        .calc-panel label {
+          font-size: 18px !important;
+          gap: 12px !important;
+        }
+        .calc-panel input,
+        .calc-panel select {
+          font-size: 28px !important;
+          min-height: 72px;
+          padding: 18px 16px !important;
+        }
+      }
+    </style>
+
+    <style id="calculator-fonts-minus-45-percent">
+      .calc-panel label {
+        font-size: 15px !important;
+        gap: 14px !important;
+      }
+      .calc-panel input,
+      .calc-panel select {
+        font-size: 23px !important;
+        min-height: 76px !important;
+        padding: 22px 18px !important;
+      }
+      @media (max-width: 900px) {
+        .calc-panel label {
+          font-size: 10px !important;
+          gap: 10px !important;
+        }
+        .calc-panel input,
+        .calc-panel select {
+          font-size: 15px !important;
+          min-height: 62px !important;
+          padding: 16px 14px !important;
+        }
+      }
+    </style>
 </head>
   <body>
     <div class="grain"></div>
@@ -3404,14 +4457,14 @@
       <section id="top" class="hero titan-hero has-image">
         <img
           class="hero-art"
-          src="assets/image-3.webp"
+          src="assets/image-04-4f90453424d6.png"
           alt="Коллекция Титан — напольное покрытие среди камня"
         />
         <div class="hero-atmosphere"></div>
         <div class="hero-vignette"></div>
         <div class="hero-brand-copy">
           <h1 class="has-rendered-title">
-            <img class="hero-title-render" src="assets/image-4.png" alt="Коллекция Титан" />
+            <img class="hero-title-render" src="assets/image-05-3a74cd09306e.png" alt="Коллекция Титан" />
           </h1>
           <div class="hero-material">
             <i></i><b>Каменно-полимерная плитка SPC</b><i></i>
@@ -3463,22 +4516,24 @@
           <div class="board"></div>
         </div>
       </section>
-      <section class="spec-strip">
+      <section class="spec-strip spec-strip-animated">
         <article class="spec">
-          <strong class="counter" data-from="5" data-to="8">5</strong
+          <strong class="counter" data-from="1" data-to="8">1</strong
           ><span>максимальная толщина, мм</span>
         </article>
         <article class="spec">
           <strong
-            ><span class="counter" data-from="38" data-to="42">38</span
+            ><span class="counter" data-from="1" data-to="42">1</span
             ><small>°C</small></strong
           ><span>тёплый пол</span>
         </article>
-        <article class="spec">
-          <strong>4V</strong><span>окрашенная фаска</span>
+        <article class="spec spec-faska">
+          <strong>4V</strong><i class="paint-stroke" aria-hidden="true"></i><span>окрашенная фаска</span>
         </article>
-        <article class="spec">
-          <strong>КМ2</strong><span>пожаробезопасность</span>
+        <article class="spec spec-fire">
+          <strong>КМ2</strong>
+          <span class="no-fire-icon" aria-hidden="true"><img src="assets/image-06-aa5283020a01.png" alt="" /></span>
+          <span>пожаробезопасность</span>
         </article>
       </section>
       <section id="technology" class="section technology">
@@ -3494,7 +4549,7 @@
         </div>
         <div class="laminate-explode reveal" id="titan3d">
           <div class="three-stage layer-art-stage" id="threeStage" data-static="true">
-            <img src="assets/image-5.png" alt="Слои каменно-полимерного покрытия SPC" />
+            <img src="assets/image-07-29eec9fcb968.png" alt="Слои каменно-полимерного покрытия SPC" />
           </div>
           <div class="lam-callout c1">
             Замковая система<small>Точное и стабильное соединение</small>
@@ -3525,9 +4580,9 @@
         </div>
       </section>
       <section id="collections" class="section collections">
-        <div class="reveal">
-          <div class="section-label">Три характера</div>
-          <h2 class="title">Выберите<br />свой Титан</h2>
+        <div class="collection-heading reveal">
+          <h2 class="title">Выбери<br />свой Титан</h2>
+          <div class="section-label collection-heading-label">Три характера</div>
         </div>
         <div class="collection-tabs reveal">
           <button class="active" data-slide="0">Титан 8</button
@@ -3672,29 +4727,36 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
           price: 3880,
         },
       ];
+      const TITAN8_DECORS = [{"name": "Церера", "code": "ECO 27-1-R", "img": "assets/image-08-f7a4fcebe67f.jpg"}, {"name": "Вега", "code": "ECO 27-2-R", "img": "assets/image-09-290da7c00496.jpg"}, {"name": "Сириус", "code": "ECO 27-3-R", "img": "assets/image-10-f95adc66dd4a.jpg"}, {"name": "Арктур", "code": "ECO 27-4-R", "img": "assets/image-11-53c4188cfaa3.jpg"}, {"name": "Орион", "code": "ECO 27-5-R", "img": "assets/image-12-d961a51ed318.jpg"}, {"name": "Осирис", "code": "ECO 27-6-R", "img": "assets/image-13-e4cd86b859d6.jpg"}, {"name": "Каллисто", "code": "ECO 27-7-R", "img": "assets/image-14-901b13b5d530.jpg"}, {"name": "Тритон", "code": "ECO 27-8-R", "img": "assets/image-15-386ead1fdbfb.jpg"}, {"name": "Антарес", "code": "ECO 27-9-R", "img": "assets/image-16-62509f1ca97a.jpg"}, {"name": "Энцелад", "code": "ECO 27-10-R", "img": "assets/image-17-5b14fed6eaf2.jpg"}, {"name": "Широн", "code": "ECO 27-11-R", "img": "assets/image-18-6566ec525024.jpg"}];
       const stage = document.querySelector("#collectionStage");
-      stage.innerHTML = C.map(
-        (c, i) =>
-          `<article class="slide ${i ? "" : "active"}"><img src="${c.img}" alt="${c.name} Alpine Floor"><div class="slide-copy"><span class="num">0${i + 1} / ${c.tag}</span><h3>${c.name}</h3><p>${c.text}</p><a class="btn" href="#calculator" data-calc="${i}">Рассчитать <b>↓</b></a></div></article>`,
+      const titan8DecorCards = TITAN8_DECORS.map((d) =>
+        `<figure class="titan8-decor-card"><img src="${d.img}" alt="Декор ${d.name} — ${d.code}"><figcaption><strong>${d.name}</strong><span>${d.code}</span></figcaption></figure>`
       ).join("");
+      stage.innerHTML = C.map((c, i) => {
+        if (i === 0) {
+          return `<article class="slide titan8-decor-slide active"><div class="titan8-decor-head"><div><small>11 декоров · коллекция Титан 8</small><h3>Все оттенки коллекции «Титан 8» — от светлых спокойных древесных тонов до более насыщенных и глубоких.</h3></div></div><div class="titan8-decor-grid">${titan8DecorCards}</div><div class="titan8-decor-actions"><a class="titan8-detail-link" href="titan-8.html">Подробнее изучить коллекцию <b>↗</b></a></div></article>`;
+        }
+        return `<article class="slide"><img src="${c.img}" alt="${c.name} Alpine Floor"><div class="slide-copy"><span class="num">0${i + 1} / ${c.tag}</span><h3>${c.name}</h3><p>${c.text}</p><a class="btn" href="#calculator" data-calc="${i}">Рассчитать <b>↓</b></a></div></article>`;
+      }).join("");
+      stage.classList.add("has-decor-grid");
       document.querySelectorAll("[data-slide]").forEach(
         (b) =>
           (b.onclick = () => {
-            document
-              .querySelector("[data-slide].active")
-              .classList.remove("active");
-            document.querySelector(".slide.active").classList.remove("active");
+            document.querySelector("[data-slide].active")?.classList.remove("active");
+            document.querySelector(".slide.active")?.classList.remove("active");
             b.classList.add("active");
-            stage.children[+b.dataset.slide].classList.add("active");
+            const index = +b.dataset.slide;
+            stage.children[index].classList.add("active");
+            stage.classList.toggle("has-decor-grid", index === 0);
           }),
       );
       const rooms = [
-        ["Гостиная", C[0].img],
-        ["Кухня", C[1].img],
-        ["Спальня", C[2].img],
-        ["Прихожая", C[0].img],
-        ["Дом", C[1].img],
-      ];
+        ["Гостиная", "assets/image-19-2ec4a29b31b2.jpg"],
+        ["Детская", "assets/image-20-71e6ccdad3cb.jpg"],
+        ["Кухня", "assets/image-21-76e29c3fe396.jpg"],
+        ["Коридор", "assets/image-22-e0b0feb71f01.jpg"],
+        ["Спальня", "assets/image-23-9865ca04c62c.jpg"],
+      ]
       const roomHtml = rooms
         .map(
           (r, i) =>
@@ -3964,5 +5026,110 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
         requestAnimationFrame(frame);
       })();
     </script>
-  </body>
+  
+    <script id="mobile-1cm-spacing-script">
+      (function () {
+        function applyMobileHeroSpacing() {
+          var hero = document.querySelector('.titan-hero.has-image');
+          if (!hero) return;
+          var cards = hero.querySelector('.hero-spec-right');
+          var install = hero.querySelector('.hero-install-copy');
+          var variants = hero.querySelector('.hero-variants');
+          if (!cards || !install || !variants) return;
+
+          if (window.innerWidth <= 900) {
+            var gapPx = 37.8; /* 1 cm */
+            var heroRect = hero.getBoundingClientRect();
+            var installRect = install.getBoundingClientRect();
+
+            cards.style.top = (installRect.bottom - heroRect.top + gapPx) + 'px';
+
+            var cardsRect = cards.getBoundingClientRect();
+            variants.style.top = (cardsRect.bottom - heroRect.top + gapPx) + 'px';
+
+            var variantsRect = variants.getBoundingClientRect();
+            var neededHeight = Math.ceil(variantsRect.bottom - heroRect.top + 60);
+            hero.style.minHeight = Math.max(neededHeight, 1100) + 'px';
+          } else {
+            cards.style.top = '';
+            variants.style.top = '';
+            hero.style.minHeight = '';
+          }
+        }
+
+        window.addEventListener('load', applyMobileHeroSpacing);
+        window.addEventListener('resize', applyMobileHeroSpacing);
+        document.addEventListener('DOMContentLoaded', function () {
+          setTimeout(applyMobileHeroSpacing, 60);
+        });
+      })();
+    </script>
+
+    <script id="mobile-correct-order-script">
+      (function () {
+        function layoutTitanHeroMobile() {
+          var hero = document.querySelector('.titan-hero.has-image');
+          if (!hero) return;
+          var copy = hero.querySelector('.hero-brand-copy');
+          var cards = hero.querySelector('.hero-spec-right');
+          var install = hero.querySelector('.hero-install-copy');
+          var variants = hero.querySelector('.hero-variants');
+          if (!copy || !cards || !install) return;
+
+          if (window.innerWidth <= 900) {
+            var gap = 16;
+            var heroRect = hero.getBoundingClientRect();
+            var installRect = install.getBoundingClientRect();
+            cards.style.top = (installRect.bottom - heroRect.top + gap) + 'px';
+
+            if (variants) {
+              var cardsRect = cards.getBoundingClientRect();
+              variants.style.top = (cardsRect.bottom - heroRect.top + gap) + 'px';
+              var variantsRect = variants.getBoundingClientRect();
+              var needed = Math.ceil(variantsRect.bottom - heroRect.top + 70);
+              hero.style.minHeight = Math.max(needed, 1120) + 'px';
+            } else {
+              var cardsRect2 = cards.getBoundingClientRect();
+              var needed2 = Math.ceil(cardsRect2.bottom - heroRect.top + 70);
+              hero.style.minHeight = Math.max(needed2, 1000) + 'px';
+            }
+          } else {
+            cards.style.top = '';
+            if (variants) variants.style.top = '';
+            hero.style.minHeight = '';
+          }
+        }
+
+        window.addEventListener('load', function () { setTimeout(layoutTitanHeroMobile, 80); });
+        window.addEventListener('resize', layoutTitanHeroMobile);
+        document.addEventListener('DOMContentLoaded', function () { setTimeout(layoutTitanHeroMobile, 80); });
+      })();
+    </script>
+
+    <script id="spec-strip-extra-animation">
+      (function () {
+        function initSpecExtras() {
+          var strip = document.querySelector('.spec-strip-animated');
+          if (!strip || strip.dataset.extraAnimationReady) return;
+          strip.dataset.extraAnimationReady = 'true';
+          var observer = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+              if (!entry.isIntersecting) return;
+              var faska = strip.querySelector('.spec-faska');
+              var fire = strip.querySelector('.spec-fire');
+              if (faska) faska.classList.add('is-animated');
+              if (fire) fire.classList.add('is-animated');
+              observer.disconnect();
+            });
+          }, { threshold: 0.28 });
+          observer.observe(strip);
+        }
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initSpecExtras);
+        } else {
+          initSpecExtras();
+        }
+      })();
+    </script>
+</body>
 </html>
