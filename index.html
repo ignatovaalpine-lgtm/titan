@@ -5185,6 +5185,52 @@
 }
 </style>
 
+
+<style id="titan8-decor-caption-final">
+  .titan8-decor-card::after,
+  .titan8-decor-card:hover::after {
+    content: none !important;
+    display: none !important;
+    opacity: 0 !important;
+  }
+
+  .titan8-decor-card figcaption {
+    display: flex !important;
+    align-items: baseline !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding: 7px 1px 2px !important;
+    text-align: left !important;
+  }
+
+  .titan8-decor-card strong {
+    font-size: 12px !important;
+    line-height: 1.1 !important;
+    font-weight: 500 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    min-width: 0 !important;
+    flex: 1 1 auto !important;
+  }
+
+  .titan8-decor-card span {
+    font-size: 7px !important;
+    line-height: 1 !important;
+    margin: 0 !important;
+    white-space: nowrap !important;
+    flex: 0 0 auto !important;
+    text-align: right !important;
+    opacity: .72 !important;
+  }
+
+  @media (max-width: 640px) {
+    .titan8-decor-card strong { font-size: 11px !important; }
+    .titan8-decor-card span { font-size: 7px !important; }
+  }
+</style>
+
 </head>
   <body>
     <div class="grain"></div>
