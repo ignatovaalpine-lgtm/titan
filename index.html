@@ -53,7 +53,7 @@
         pointer-events: none;
         z-index: 90;
         opacity: 0.035;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+        background-image: url("assets/images/grain-texture.svg'0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
       }
       .cursor-glow {
         position: fixed;
@@ -160,7 +160,7 @@
       .hero-image {
         position: absolute;
         inset: 0;
-        background: url("assets/image-01-e90c879a9c81.png") center/cover no-repeat;
+        background: url("assets/images/image-01-d6bf05e472.png") center/cover no-repeat;
         transform: scale(1.035);
         animation: heroZoom 12s ease-out forwards;
       }
@@ -1050,8 +1050,68 @@
           transform: none;
         }
       }
-    :root{--titan-mountain:url('assets/image-02-f87f41ec3f42.png')}
-</style>
+    :root{--titan-mountain:url('assets/images/image-02-ca4df12586.png')}
+
+      /* Интерактивное видео в блоке «Тяжёлый характер. Точная инженерия.» */
+      .engineering-video-stage {
+        height: 580px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        perspective: 1200px;
+        overflow: visible;
+        isolation: isolate;
+      }
+      .engineering-video-stage::before {
+        content: "";
+        position: absolute;
+        inset: 8% 3%;
+        background: radial-gradient(circle at 50% 50%, rgba(69, 216, 223, .07), transparent 62%);
+        filter: blur(30px);
+        pointer-events: none;
+        z-index: -1;
+      }
+      .engineering-video-wrap {
+        width: min(100%, 760px);
+        transform: none;
+        will-change: auto;
+        transition: filter 180ms ease-out;
+        border-radius: 2px;
+      }
+      .engineering-video {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 560px;
+        object-fit: contain;
+        background: #000;
+        mix-blend-mode: normal;
+        pointer-events: none;
+        user-select: none;
+        -webkit-user-drag: none;
+        filter: drop-shadow(0 30px 42px rgba(0,0,0,.52));
+      }
+      .engineering-video-stage:hover .engineering-video-wrap {
+        filter: drop-shadow(0 0 26px rgba(68,217,223,.08));
+      }
+      @media (max-width: 900px) {
+        .engineering-video-stage { height: auto; min-height: 380px; margin-top: 26px; }
+        .engineering-video-wrap { width: min(100%, 680px); }
+        .engineering-video { max-height: 480px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .engineering-video-wrap { transition: none !important; transform: none !important; }
+      }
+
+    /* Ultra-smooth cursor-controlled video scrub */
+    #engineeringVideo {
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      will-change: contents;
+    }
+
+  </style>
     <style>
       .titan-hero {
         height: 100svh;
@@ -1235,13 +1295,8 @@
         margin-top: 6px;
       }
       .hero-spec-right div:nth-child(2):after {
-        content: "◆";
-        position: absolute;
-        color: var(--aqua);
-        font-size: 25px;
-        right: 7%;
-        top: 36%;
-        text-shadow: 0 0 12px var(--aqua);
+        content: none;
+        display: none;
       }
       .hero-bottom {
         position: absolute;
@@ -2516,7 +2571,10 @@
         object-fit: cover;
         object-position: center;
         filter: brightness(0.82) contrast(1.08);
-        animation: heroArtReveal 8s cubic-bezier(0.16, 0.7, 0.2, 1) both;
+      }
+      .hero-video {
+        pointer-events: none;
+        background: #000;
       }
       .hero-atmosphere {
         position: absolute;
@@ -3761,7 +3819,7 @@
         opacity: 0;
         transform: scaleX(0) rotate(-3deg);
         transform-origin: left center;
-        background: url("assets/image-03-4e3257059057.png") center / contain no-repeat;
+        background: url("assets/images/image-03-f7e5b402d4.png") center / contain no-repeat;
         filter: none;
       }
       .spec-faska.is-animated .paint-stroke {
@@ -4411,38 +4469,729 @@
         }
       }
     </style>
+<style id="final-responsive-mobile-layout">
+  /* Финальный адаптивный слой. Он подключён последним и перекрывает ранние тестовые media-правила. */
+  @media (max-width: 1180px) {
+    :root { --pad: clamp(20px, 4vw, 44px); }
+    .nav { gap: 24px; }
+    .section { padding-inline: var(--pad); }
+    .calculator { gap: 6vw; }
+    .titan8-decor-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+  }
+
+  @media (max-width: 900px) {
+    html, body { width: 100%; max-width: 100%; overflow-x: hidden; }
+    body { min-width: 320px; }
+    .cursor-glow { display: none; }
+    :root { --pad: clamp(18px, 5vw, 30px); }
+
+    /* Шапка и мобильное меню */
+    .topbar,
+    .topbar.scrolled {
+      height: 72px !important;
+      padding: 0 18px !important;
+      background: rgba(5, 6, 7, .9) !important;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.09);
+    }
+    .brand { gap: 8px !important; min-width: 0; }
+    .brand-mark { width: 38px !important; height: 42px !important; flex: 0 0 auto; }
+    .brand-name { font-size: clamp(18px, 5vw, 24px); white-space: nowrap; }
+    .brand-divider { height: 30px; margin-inline: 2px; }
+    .brand-collection { font-size: clamp(12px, 3.5vw, 16px); white-space: nowrap; }
+    .burger { display: flex !important; width: 38px; height: 38px; flex: 0 0 auto; }
+    .nav {
+      position: fixed !important;
+      inset: 72px 0 auto !important;
+      width: 100% !important;
+      height: auto !important;
+      padding: 18px !important;
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 8px !important;
+      background: rgba(5, 6, 7, .97) !important;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+      transform: translateY(-115%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform .35s ease, opacity .35s ease;
+      z-index: 69;
+      font-size: 16px !important;
+    }
+    .nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+    .nav a { padding: 14px 12px; border-bottom: 1px solid rgba(255,255,255,.06); }
+    .nav .buy { text-align: center; border: 1px solid rgba(255,255,255,.25); margin-top: 4px; }
+
+    /* Первый экран: строгий порядок и без наложений */
+    .titan-hero.has-image {
+      min-height: 1060px !important;
+      height: auto !important;
+      aspect-ratio: auto !important;
+      overflow: hidden;
+      padding-top: 72px;
+    }
+    .titan-hero.has-image .hero-art {
+      inset: 72px 0 0 !important;
+      width: 100% !important;
+      height: calc(100% - 72px) !important;
+      object-fit: cover !important;
+      object-position: 63% center !important;
+    }
+    .titan-hero.has-image .hero-vignette {
+      background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.22) 45%, rgba(0,0,0,.85) 100%) !important;
+    }
+    .titan-hero.has-image .hero-brand-copy {
+      position: absolute !important;
+      left: 20px !important;
+      right: 20px !important;
+      top: 27% !important;
+      width: auto !important;
+      transform: none !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 0 !important;
+      z-index: 12 !important;
+    }
+    .titan-hero.has-image .hero-brand-copy h1.has-rendered-title {
+      order: 1 !important;
+      width: min(88vw, 430px) !important;
+      max-width: 100% !important;
+      margin: 0 !important;
+    }
+    .titan-hero.has-image .hero-title-render { width: 100% !important; height: auto !important; }
+    .titan-hero.has-image .hero-material {
+      order: 2 !important;
+      width: min(88vw, 430px) !important;
+      margin: 18px 0 0 !important;
+      gap: 8px !important;
+    }
+    .titan-hero.has-image .hero-material b { font-size: clamp(9px, 2.5vw, 12px) !important; }
+    .titan-hero.has-image .hero-install-copy {
+      order: 3 !important;
+      width: min(78vw, 340px) !important;
+      margin: 12px 0 0 !important;
+      font-size: clamp(8px, 2.2vw, 11px) !important;
+      line-height: 1.45 !important;
+      text-align: left !important;
+    }
+    .titan-hero.has-image .hero-spec-right {
+      position: absolute !important;
+      left: 20px !important;
+      right: 20px !important;
+      top: 55% !important;
+      width: auto !important;
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 10px !important;
+      transform: none !important;
+      z-index: 13 !important;
+    }
+    .titan-hero.has-image .hero-spec-right > div {
+      min-height: 76px !important;
+      padding: 14px 18px !important;
+      align-items: flex-start !important;
+      text-align: left !important;
+      background: linear-gradient(110deg, rgba(214,202,188,.32), rgba(9,18,25,.48)) !important;
+      border: 1px solid rgba(255,255,255,.18) !important;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .titan-hero.has-image .hero-spec-right strong { font-size: clamp(18px, 4.8vw, 23px) !important; }
+    .titan-hero.has-image .hero-spec-right span { font-size: clamp(8px, 2.1vw, 10px) !important; line-height: 1.35 !important; }
+    .titan-hero.has-image .hero-variants {
+      position: absolute !important;
+      left: 20px !important;
+      right: 20px !important;
+      top: auto !important;
+      bottom: 30px !important;
+      width: auto !important;
+      margin: 0 !important;
+      display: flex !important;
+      flex-wrap: wrap !important;
+      gap: 14px 24px !important;
+      z-index: 13 !important;
+      font-size: 11px !important;
+    }
+    .hero-spec-left, .hero-bottom, .hero-install { display: none !important; }
+
+    /* Общие секции */
+    .section { padding: 72px var(--pad) !important; }
+    .section .title, .final h2 {
+      font-size: clamp(42px, 12vw, 72px) !important;
+      line-height: .92 !important;
+      max-width: 100%;
+    }
+    .section-label {
+      font-size: 12px !important;
+      gap: 13px !important;
+      margin-bottom: 18px !important;
+      line-height: 1.25;
+    }
+    .section-label:before { width: 42px !important; }
+
+    /* Вступление */
+    .intro {
+      grid-template-columns: 1fr !important;
+      gap: 42px !important;
+      min-height: 0 !important;
+      align-items: start !important;
+    }
+    .intro-copy { max-width: 100% !important; }
+    .intro-copy p { font-size: 15px !important; line-height: 1.75 !important; max-width: 100% !important; }
+    .monolith { min-height: 420px !important; width: 100% !important; transform: none !important; }
+
+    /* Четыре характеристики */
+    .spec-strip {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      padding: 0 !important;
+    }
+    .spec { padding: 30px 22px !important; min-height: 180px; }
+    .spec:nth-child(2) { border-right: 0 !important; }
+    .spec:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    .spec strong { font-size: clamp(48px, 14vw, 68px) !important; }
+    .spec span { font-size: 10px !important; line-height: 1.35; }
+    .paint-stroke { width: 64px !important; height: 34px !important; }
+    .no-fire-icon { width: 44px !important; height: 44px !important; }
+
+    /* Технологии */
+    .tech-head {
+      grid-template-columns: 1fr !important;
+      gap: 26px !important;
+      align-items: start !important;
+    }
+    .tech-head p { max-width: 100% !important; font-size: 14px !important; }
+    .laminate-explode {
+      min-height: 680px !important;
+      margin-top: 30px !important;
+      transform-origin: center top;
+    }
+    .laminate-board { width: min(82vw, 620px) !important; }
+    .lam-callout { font-size: 10px !important; max-width: 150px !important; }
+    .lam-callout small { font-size: 8px !important; }
+
+    /* Коллекции */
+    .collection-heading {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 20px !important;
+    }
+    .collection-heading-label { margin: 0 !important; }
+    .collection-tabs {
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 10px !important;
+      margin: 34px 0 24px !important;
+      border-bottom: 0 !important;
+      padding: 0 !important;
+    }
+    .collection-tabs button {
+      width: 100%;
+      min-height: 58px !important;
+      padding: 18px 18px 14px !important;
+      font-size: 24px !important;
+      text-align: left;
+    }
+    .collection-stage { min-height: 0 !important; height: auto !important; overflow: visible !important; }
+    .slide.titan8-decor-slide { padding: 18px 0 !important; }
+    .titan8-decor-head { display: block !important; margin-bottom: 24px !important; }
+    .titan8-decor-head h3 { font-size: clamp(19px, 5.2vw, 28px) !important; max-width: 100% !important; }
+    .titan8-decor-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 24px 14px !important;
+    }
+    .titan8-decor-card { max-width: none !important; }
+    .titan8-decor-card img { border-radius: 10px !important; }
+    .titan8-decor-card strong { font-size: 12px !important; }
+    .titan8-decor-card span { font-size: 10px !important; }
+    .titan8-decor-actions { justify-content: stretch !important; margin-top: 30px !important; }
+    .titan8-detail-link { width: 100%; justify-content: space-between; }
+    .collection-stage:not(.has-decor-grid) { min-height: 520px !important; }
+    .collection-stage:not(.has-decor-grid) .slide { min-height: 520px; }
+    .slide-copy { left: 22px !important; right: 22px !important; bottom: 28px !important; }
+    .slide-copy h3 { font-size: clamp(58px, 18vw, 92px) !important; }
+
+    /* Преимущества */
+    .features {
+      grid-template-columns: 1fr !important;
+      gap: 1px !important;
+      padding: 1px !important;
+    }
+    .feature { min-height: 280px !important; padding: 34px 26px !important; }
+    .feature h3 { margin: 58px 0 16px !important; font-size: 34px !important; }
+    .feature p { font-size: 14px !important; max-width: 520px; }
+
+    /* Галерея интерьеров */
+    .rooms { padding-inline: 0 !important; overflow: hidden; }
+    .rooms-head {
+      padding: 0 var(--pad) !important;
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 28px !important;
+      align-items: start !important;
+    }
+    .rooms-head p {
+      font-size: 18px !important;
+      line-height: 1.6 !important;
+      max-width: 100% !important;
+      font-weight: 200 !important;
+    }
+    .marquee { gap: 12px !important; margin-top: 42px !important; }
+    .room { width: 78vw !important; max-width: 430px; height: 62vh !important; min-height: 420px; max-height: 570px; }
+    .room span { left: 20px !important; bottom: 22px !important; font-size: 22px !important; }
+
+    /* Калькулятор */
+    .calculator {
+      grid-template-columns: 1fr !important;
+      gap: 46px !important;
+    }
+    .calc-copy p { font-size: 15px !important; max-width: 100% !important; }
+    .calc-panel { width: 100%; padding-top: 22px !important; }
+    .field-row { grid-template-columns: 1fr !important; gap: 18px !important; }
+    .calc-panel label { font-size: 11px !important; gap: 10px !important; }
+    .calc-panel input, .calc-panel select {
+      min-height: 62px !important;
+      font-size: 18px !important;
+      padding: 16px 14px !important;
+    }
+    .result { grid-template-columns: 1fr !important; }
+    .result div { min-height: 100px !important; }
+    .result span { font-size: 9px !important; }
+    .result strong { font-size: 30px !important; }
+
+    /* Финальный экран и футер */
+    .final { min-height: 72vh !important; padding-block: 90px !important; }
+    .final-inner { width: 100%; }
+    .final h2 { font-size: clamp(50px, 14vw, 80px) !important; }
+    footer {
+      padding: 28px 20px !important;
+      display: grid !important;
+      grid-template-columns: 1fr !important;
+      gap: 16px !important;
+      text-align: center;
+    }
+    footer .brand { justify-content: center; }
+  }
+
+  @media (max-width: 560px) {
+    .topbar, .topbar.scrolled { padding-inline: 14px !important; }
+    .brand-mark { width: 32px !important; height: 36px !important; }
+    .brand-name { font-size: 18px; }
+    .brand-divider { height: 25px; }
+    .brand-collection { font-size: 12px; }
+    .titan-hero.has-image { min-height: 980px !important; }
+    .titan-hero.has-image .hero-art { object-position: 62% center !important; }
+    .titan-hero.has-image .hero-brand-copy { top: 29% !important; left: 16px !important; right: 16px !important; }
+    .titan-hero.has-image .hero-spec-right { top: 56% !important; left: 16px !important; right: 16px !important; }
+    .titan-hero.has-image .hero-spec-right > div { min-height: 68px !important; padding: 12px 15px !important; }
+    .titan-hero.has-image .hero-variants { left: 16px !important; right: 16px !important; bottom: 20px !important; gap: 12px 18px !important; font-size: 10px !important; }
+    .section { padding: 58px 18px !important; }
+    .section .title, .final h2 { font-size: clamp(38px, 12.5vw, 62px) !important; }
+    .monolith { min-height: 330px !important; }
+    .spec-strip { grid-template-columns: 1fr !important; }
+    .spec { border-right: 0 !important; border-bottom: 1px solid var(--line) !important; min-height: 150px; }
+    .spec:last-child { border-bottom: 0 !important; }
+    .titan8-decor-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .laminate-explode { min-height: 610px !important; }
+    .room { width: 86vw !important; height: 58vh !important; }
+  }
+
+  @media (max-width: 360px) {
+    .brand-collection { display: none; }
+    .brand-divider { display: none; }
+    .titan-hero.has-image .hero-brand-copy { top: 28% !important; }
+    .titan-hero.has-image .hero-spec-right { top: 55% !important; }
+    .titan8-decor-grid { gap: 20px 10px !important; }
+  }
+</style>
+
+
+    <style id="hero-dust-effect">
+      .hero-dust-canvas,
+      .hero-impact-glow {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 2;
+      }
+      .hero-dust-canvas {
+        opacity: 0.95;
+        mix-blend-mode: screen;
+      }
+      .hero-impact-glow {
+        inset: auto;
+        left: 50%;
+        top: 74%;
+        width: min(52vw, 780px);
+        height: min(20vw, 260px);
+        transform: translateX(-8%) scale(0.72);
+        border-radius: 50%;
+        background: radial-gradient(ellipse at center, rgba(214, 200, 182, 0.26) 0%, rgba(175, 165, 146, 0.14) 30%, rgba(86, 82, 71, 0.07) 52%, rgba(0,0,0,0) 76%);
+        filter: blur(18px);
+        opacity: 0;
+        animation: heroDustBloom 1.65s 1.68s cubic-bezier(0.17,0.7,0.12,1) forwards;
+      }
+      @keyframes heroDustBloom {
+        0% { opacity: 0; transform: translateX(-8%) scale(0.56); }
+        12% { opacity: 0.7; }
+        100% { opacity: 0; transform: translateX(-8%) scale(1.12) translateY(10px); }
+      }
+      @media (max-width: 900px) {
+        .hero-impact-glow {
+          left: 52%;
+          top: 80%;
+          width: 72vw;
+          height: 28vw;
+          transform: translateX(-16%) scale(0.68);
+          filter: blur(14px);
+        }
+        .hero-dust-canvas {
+          opacity: 0.85;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .hero-dust-canvas, .hero-impact-glow {
+          display: none !important;
+        }
+      }
+    </style>
+
+<style id="hero-variants-2x-final">
+  /* Блок 6 ММ / 8 ММ / ПАРКЕТ 6 ММ — увеличить ровно в 2 раза */
+  .titan-hero .hero-variants {
+    font-size: clamp(20px, 1.64vw, 28px) !important;
+    gap: clamp(36px, 4vw, 68px) !important;
+    letter-spacing: 0.14em !important;
+  }
+  .titan-hero .hero-variants span {
+    gap: 20px !important;
+  }
+  .titan-hero .hero-variants span:before {
+    width: 36px !important;
+    height: 2px !important;
+  }
+  @media (max-width: 900px) {
+    .titan-hero .hero-variants {
+      font-size: 20px !important;
+      gap: 24px 36px !important;
+    }
+    .titan-hero .hero-variants span { gap: 12px !important; }
+    .titan-hero .hero-variants span:before { width: 20px !important; height: 2px !important; }
+  }
+</style>
+
+<style id="hero-cleanup-remove-sign-and-smoke">
+  .topbar .brand-mark {
+    display: inline-flex !important;
+    width: 42px !important;
+    height: 42px !important;
+    flex: 0 0 auto;
+    align-items: center !important;
+    justify-content: center !important;
+    transform: none !important;
+  }
+  .topbar .brand-mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .topbar .brand { gap: 12px !important; }
+  .hero-dust-canvas,
+  .hero-impact-glow { display: none !important; }
+</style>
+
+<style id="brand-logo-final-position">
+  .topbar .brand { gap: 12px !important; }
+  @media (max-width: 700px) {
+    .topbar .brand-mark { width: 38px !important; height: 38px !important; flex-basis: 38px !important; }
+  }
+</style>
+
+<style id="global-letter-spacing">
+  * { letter-spacing: -0.02em !important; }
+</style>
+
+<style id="titan8-product-specs-popup">
+  .titan8-product-shell{padding:clamp(28px,4vw,64px) 0 0;position:relative;}
+  .titan8-product-top{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(420px,.95fr);gap:clamp(30px,5vw,86px);align-items:end;padding-bottom:clamp(36px,5vw,72px);border-bottom:1px solid rgba(255,255,255,.14);}
+  .titan8-product-kicker{font-size:11px;text-transform:uppercase;color:#7e878d;margin-bottom:16px;}
+  .titan8-product-title{margin:0;font-size:clamp(58px,8vw,128px);line-height:.86;font-weight:700;}
+  .titan8-product-title span{font-size:.52em;font-weight:500;margin-left:.14em;color:#d8dbdd;}
+  .titan8-product-lead{margin:24px 0 0;max-width:620px;color:#9ba3a8;font-size:13px;line-height:1.65;}
+  .titan8-keyfacts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14);}
+  .titan8-keyfact{background:#0b0c0e;padding:24px;min-height:132px;display:flex;flex-direction:column;justify-content:space-between;}
+  .titan8-keyfact b{font-size:clamp(28px,3.2vw,50px);font-weight:400;line-height:.95;}
+  .titan8-keyfact span{font-size:10px;color:#80898f;text-transform:uppercase;}
+  .titan8-keyfact:nth-child(2) b,.titan8-keyfact:nth-child(3) b{color:var(--aqua);}
+  .titan8-spec-columns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,46px);padding:clamp(38px,5vw,72px) 0;}
+  .titan8-spec-group h4{margin:0 0 18px;font-size:11px;color:#7e878d;text-transform:uppercase;font-weight:600;}
+  .titan8-spec-list{border-top:1px solid rgba(255,255,255,.22);}
+  .titan8-spec-row{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:18px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.13);align-items:start;}
+  .titan8-spec-row span{font-size:10px;color:#7c858b;text-transform:uppercase;line-height:1.35;}
+  .titan8-spec-row b{font-size:12px;line-height:1.35;font-weight:500;color:#eef0f1;}
+  .titan8-decor-section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin:12px 0 26px;}
+  .titan8-decor-section-head h4{font-size:clamp(28px,3.2vw,50px);font-weight:300;margin:0;}
+  .titan8-decor-section-head p{max-width:460px;margin:0;color:#7f878d;font-size:11px;line-height:1.6;}
+  .titan8-decor-card{cursor:pointer;position:relative;}
+  .titan8-decor-card:after{content:'Смотреть декор  ↗';position:absolute;left:16px;right:16px;bottom:58px;padding:10px 12px;background:rgba(4,6,7,.8);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.14);font-size:9px;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:.3s;pointer-events:none;}
+  .titan8-decor-card:hover:after{opacity:1;transform:none;}
+  .titan8-decor-card:focus-visible{outline:1px solid var(--aqua);outline-offset:4px;}
+  .decor-modal{position:fixed;inset:0;z-index:9999;background:rgba(3,4,5,.92);backdrop-filter:blur(20px);display:none;align-items:center;justify-content:center;padding:clamp(18px,3vw,48px);}
+  .decor-modal.open{display:flex;}
+  .decor-modal-panel{width:min(1320px,96vw);height:min(820px,92vh);background:#090a0c;border:1px solid rgba(255,255,255,.15);display:grid;grid-template-columns:minmax(0,1.35fr) minmax(300px,.65fr);overflow:hidden;position:relative;}
+  .decor-modal-close{position:absolute;right:16px;top:16px;z-index:3;width:42px;height:42px;border:1px solid rgba(255,255,255,.22);background:rgba(5,6,7,.72);color:#fff;font-size:24px;cursor:pointer;}
+  .decor-modal-media{position:relative;background:#050607;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .decor-modal-main{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .2s;}
+  .decor-modal-arrow{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:58px;background:rgba(5,6,7,.58);border:1px solid rgba(255,255,255,.14);color:#fff;font-size:22px;cursor:pointer;}
+  .decor-modal-prev{left:16px}.decor-modal-next{right:16px}
+  .decor-modal-side{padding:clamp(28px,4vw,56px);display:flex;flex-direction:column;overflow:auto;}
+  .decor-modal-side small{font-size:10px;text-transform:uppercase;color:#7d858a;}
+  .decor-modal-side h3{margin:10px 0 4px;font-size:clamp(38px,4vw,70px);font-weight:300;}
+  .decor-modal-code{color:var(--aqua);font-size:12px;margin-bottom:34px;}
+  .decor-modal-side p{color:#8e969b;font-size:12px;line-height:1.7;margin:0 0 28px;}
+  .decor-modal-thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:auto;}
+  .decor-modal-thumb{aspect-ratio:1.3;border:1px solid rgba(255,255,255,.14);padding:0;background:#111;cursor:pointer;overflow:hidden;}
+  .decor-modal-thumb.active{border-color:var(--aqua);}
+  .decor-modal-thumb img{width:100%;height:100%;object-fit:cover;}
+  .decor-modal-note{margin-top:16px;color:#666f75;font-size:9px;line-height:1.5;}
+  body.decor-modal-open{overflow:hidden;}
+  @media(max-width:980px){.titan8-product-top{grid-template-columns:1fr}.titan8-spec-columns{grid-template-columns:1fr}.decor-modal-panel{grid-template-columns:1fr;height:94vh}.decor-modal-media{min-height:54vh}.decor-modal-side{min-height:40vh}.decor-modal-thumbs{grid-template-columns:repeat(4,1fr)}}
+  @media(max-width:640px){.titan8-product-title{font-size:54px}.titan8-keyfacts{grid-template-columns:1fr 1fr}.titan8-keyfact{padding:16px;min-height:100px}.titan8-spec-row{grid-template-columns:1fr;gap:5px}.titan8-decor-section-head{display:block}.titan8-decor-section-head p{margin-top:12px}.titan8-decor-card:after{display:none}.decor-modal{padding:0}.decor-modal-panel{width:100vw;height:100vh;border:0}.decor-modal-media{min-height:55vh}.decor-modal-side{padding:24px 18px}.decor-modal-close{right:10px;top:10px}}
+</style>
+
+<style id="titan8-one-tab-compact-final">
+  .titan8-product-shell{padding:clamp(22px,3vw,42px) 0 10px!important;}
+  .titan8-one-screen{display:grid;grid-template-columns:minmax(340px,.78fr) minmax(0,1.45fr);gap:clamp(28px,4vw,64px);align-items:start;}
+  .titan8-info-compact{position:sticky;top:90px;}
+  .titan8-product-kicker{margin-bottom:10px!important;font-size:9px!important;color:#747d83!important;}
+  .titan8-product-title{font-size:clamp(48px,5.5vw,82px)!important;line-height:.9!important;margin:0 0 22px!important;}
+  .titan8-product-title span{font-size:.5em!important;}
+  .titan8-keyfacts{grid-template-columns:repeat(4,1fr)!important;margin-bottom:24px!important;}
+  .titan8-keyfact{min-height:86px!important;padding:14px 12px!important;}
+  .titan8-keyfact b{font-size:clamp(21px,2vw,31px)!important;}
+  .titan8-keyfact span{font-size:8px!important;line-height:1.25!important;}
+  .titan8-compact-specs{border-top:1px solid rgba(255,255,255,.18);}
+  .titan8-compact-spec{display:grid;grid-template-columns:.9fr 1.1fr;gap:14px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.10);align-items:start;}
+  .titan8-compact-spec span{font-size:9px;text-transform:uppercase;color:#747d83;line-height:1.3;}
+  .titan8-compact-spec b{font-size:11px;font-weight:500;line-height:1.35;color:#eef0f1;}
+  .titan8-decor-side{min-width:0;}
+  .titan8-decor-section-head{margin:0 0 16px!important;display:block!important;}
+  .titan8-decor-section-head h4{font-size:clamp(24px,2.5vw,38px)!important;}
+  .titan8-decor-section-head p{margin-top:7px!important;max-width:none!important;font-size:9px!important;line-height:1.45!important;}
+  .titan8-decor-grid{grid-template-columns:repeat(6,minmax(0,1fr))!important;gap:10px!important;}
+  .titan8-decor-card{padding:6px!important;min-width:0!important;}
+  .titan8-decor-card:hover{transform:translateY(-3px)!important;}
+  .titan8-decor-card img{aspect-ratio:1/1.28!important;border-radius:0!important;}
+  .titan8-decor-card figcaption{padding:7px 1px 1px!important;}
+  .titan8-decor-card strong{font-size:10px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .titan8-decor-card span{font-size:8px!important;white-space:nowrap;}
+  .titan8-decor-card:after{left:6px!important;right:6px!important;bottom:35px!important;padding:7px!important;font-size:7px!important;}
+  .titan8-decor-actions{display:none!important;}
+  @media(max-width:1180px){
+    .titan8-one-screen{grid-template-columns:minmax(300px,.8fr) minmax(0,1.2fr);gap:28px;}
+    .titan8-decor-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important;}
+  }
+  @media(max-width:900px){
+    .titan8-one-screen{grid-template-columns:1fr!important;}
+    .titan8-info-compact{position:static!important;}
+    .titan8-decor-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;}
+  }
+  @media(max-width:640px){
+    .titan8-keyfacts{grid-template-columns:repeat(2,1fr)!important;}
+    .titan8-decor-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;}
+    .titan8-compact-spec{grid-template-columns:1fr 1.15fr!important;gap:10px!important;}
+  }
+</style>
+
+<style id="titan8-stable-layout-final">
+  /* Стабильная компоновка вкладки Титан 8 после удаления повторного заголовка */
+  .titan8-product-shell{padding-top:24px!important;}
+  .titan8-one-screen{
+    display:grid!important;
+    grid-template-columns:minmax(320px,390px) minmax(0,1fr)!important;
+    gap:clamp(32px,4vw,58px)!important;
+    align-items:start!important;
+  }
+  .titan8-info-compact{position:sticky!important;top:90px!important;min-width:0!important;}
+  .titan8-keyfacts{margin-top:0!important;margin-bottom:22px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+  .titan8-keyfact{min-height:92px!important;}
+  .titan8-decor-side{width:100%!important;min-width:0!important;}
+  .titan8-decor-section-head{margin:0 0 20px!important;}
+  .titan8-decor-section-head h4{font-size:clamp(28px,3vw,44px)!important;font-weight:300!important;}
+  .titan8-decor-grid{
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:14px!important;
+    width:100%!important;
+  }
+  .titan8-decor-card{width:auto!important;max-width:none!important;min-width:0!important;padding:8px!important;}
+  .titan8-decor-card img{width:100%!important;aspect-ratio:1/1.22!important;object-fit:cover!important;}
+  .titan8-decor-card figcaption{padding:9px 2px 2px!important;}
+  .titan8-decor-card strong{font-size:11px!important;}
+  .titan8-decor-card span{font-size:8px!important;}
+  @media(max-width:1180px){
+    .titan8-one-screen{grid-template-columns:minmax(285px,340px) minmax(0,1fr)!important;gap:28px!important;}
+    .titan8-decor-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;}
+  }
+  @media(max-width:900px){
+    .titan8-one-screen{grid-template-columns:1fr!important;}
+    .titan8-info-compact{position:static!important;}
+    .titan8-keyfacts{grid-template-columns:repeat(4,minmax(0,1fr))!important;}
+    .titan8-decor-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;}
+  }
+  @media(max-width:640px){
+    .titan8-keyfacts{grid-template-columns:repeat(2,minmax(0,1fr))!important;}
+    .titan8-decor-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;}
+  }
+</style>
+
+<style id="titan8-decors-fit-one-screen-final">
+  /* Компактная галерея: 11 декоров помещаются в две короткие строки */
+  @media (min-width: 901px) {
+    .titan8-one-screen{
+      grid-template-columns:minmax(300px,350px) minmax(0,1fr)!important;
+      gap:clamp(24px,3vw,42px)!important;
+    }
+    .titan8-decor-section-head{margin:0 0 10px!important;}
+    .titan8-decor-section-head h4{font-size:clamp(24px,2.3vw,34px)!important;line-height:1!important;}
+    .titan8-decor-section-head p{display:none!important;}
+    .titan8-decor-grid{
+      grid-template-columns:repeat(6,minmax(0,1fr))!important;
+      gap:8px!important;
+      align-items:start!important;
+    }
+    .titan8-decor-card{padding:5px!important;max-width:none!important;}
+    .titan8-decor-card img{
+      aspect-ratio:1/0.92!important;
+      height:auto!important;
+      object-fit:cover!important;
+    }
+    .titan8-decor-card figcaption{padding:5px 1px 1px!important;line-height:1.1!important;}
+    .titan8-decor-card strong{font-size:9px!important;line-height:1.05!important;}
+    .titan8-decor-card span{font-size:7px!important;line-height:1!important;margin-top:2px!important;}
+    .titan8-decor-card:after{
+      left:5px!important;right:5px!important;bottom:27px!important;
+      padding:5px 6px!important;font-size:6px!important;
+    }
+    .titan8-keyfacts{margin-bottom:14px!important;}
+    .titan8-keyfact{min-height:74px!important;padding:10px!important;}
+    .titan8-compact-spec{padding:7px 0!important;}
+    .titan8-compact-spec span{font-size:8px!important;}
+    .titan8-compact-spec b{font-size:10px!important;}
+  }
+  @media (min-width: 901px) and (max-width: 1180px) {
+    .titan8-decor-grid{grid-template-columns:repeat(6,minmax(0,1fr))!important;}
+    .titan8-one-screen{grid-template-columns:minmax(270px,310px) minmax(0,1fr)!important;gap:22px!important;}
+  }
+</style>
+
+<style id="titan8-decor-click-hover-fix">
+  .titan8-decor-card{
+    cursor:pointer!important;
+    border:1px solid transparent!important;
+    transition:border-color .22s ease, box-shadow .22s ease, transform .22s ease!important;
+    box-sizing:border-box!important;
+  }
+  .titan8-decor-card:hover,
+  .titan8-decor-card:focus-visible{
+    border-color:rgba(68,217,223,.95)!important;
+    box-shadow:0 0 0 1px rgba(68,217,223,.14),0 0 22px rgba(68,217,223,.12)!important;
+    outline:none!important;
+  }
+</style>
+
+<style id="titan8-decor-click-hover-hard-final">
+  .titan8-decor-card {
+    position:relative!important;
+    cursor:pointer!important;
+    pointer-events:auto!important;
+    box-shadow:inset 0 0 0 1px transparent!important;
+    border-color:rgba(255,255,255,.08)!important;
+    transition:transform .22s ease, box-shadow .22s ease, border-color .22s ease, background .22s ease!important;
+    z-index:1;
+  }
+  .titan8-decor-card img, .titan8-decor-card figcaption, .titan8-decor-card strong, .titan8-decor-card span { pointer-events:none!important; }
+  .titan8-decor-card:hover, .titan8-decor-card:focus-visible {
+    transform:translateY(-3px)!important;
+    border-color:#44d9df!important;
+    box-shadow:inset 0 0 0 2px #44d9df, 0 0 22px rgba(68,217,223,.18)!important;
+    background:linear-gradient(180deg,rgba(68,217,223,.055),rgba(255,255,255,.012))!important;
+    outline:none!important;
+    z-index:3!important;
+  }
+</style>
+
+<style id="engineering-seamless-bg-fix">
+/* Точная подгонка секции под чёрный фон исходного видео */
+.section.intro {
+  background: #08060a !important;
+  grid-template-columns: 0.82fr 1.18fr !important;
+  gap: clamp(38px, 4vw, 78px) !important;
+  min-height: 780px !important;
+  overflow: hidden;
+}
+.section.intro::before,
+.section.intro::after {
+  background: transparent !important;
+}
+.section.intro .engineering-video-stage {
+  height: 700px !important;
+  min-height: 700px !important;
+  width: 100% !important;
+  overflow: visible !important;
+  background: #08060a !important;
+}
+.section.intro .engineering-video-stage::before {
+  display: none !important;
+}
+.section.intro .engineering-video-wrap {
+  width: 112% !important;
+  height: 100% !important;
+  max-width: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #08060a !important;
+}
+.section.intro .engineering-video {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  background: #08060a !important;
+  filter: none !important;
+}
+.section.intro .engineering-video-stage:hover .engineering-video-wrap {
+  filter: none !important;
+}
+@media (max-width: 900px) {
+  .section.intro {
+    grid-template-columns: 1fr !important;
+    min-height: 0 !important;
+    gap: 34px !important;
+  }
+  .section.intro .engineering-video-stage {
+    height: min(68vw, 560px) !important;
+    min-height: 360px !important;
+    margin-top: 0 !important;
+  }
+  .section.intro .engineering-video-wrap {
+    width: 112% !important;
+    margin-left: -6% !important;
+  }
+}
+</style>
+
 </head>
   <body>
     <div class="grain"></div>
     <div class="cursor-glow"></div>
     <header class="topbar">
       <a class="brand" href="#top" aria-label="Alpine floor — коллекция Титан"
-        ><span class="brand-mark"
-          ><svg viewBox="0 0 64 64" aria-hidden="true">
-            <defs>
-              <linearGradient id="logoTop" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#19c7c3" />
-                <stop offset="1" stop-color="#008f8e" />
-              </linearGradient>
-              <linearGradient id="logoSide" x1="0" y1="0" x2="1" y2="1">
-                <stop stop-color="#009b99" />
-                <stop offset="1" stop-color="#005e63" />
-              </linearGradient>
-            </defs>
-            <path
-              d="M32 3 58 18v29L32 62 6 47V18Z"
-              fill="#061116"
-              stroke="#00b7b3"
-              stroke-width="1.5"
-            />
-            <path d="M32 6 56 20 32 34 8 20Z" fill="url(#logoTop)" />
-            <path d="M8 20 32 34v25L8 45Z" fill="url(#logoSide)" />
-            <path d="M56 20 32 34v25l24-14Z" fill="#007c7d" />
-            <g fill="none" stroke="#001b20" stroke-width="1">
-              <path d="m13 43 19 11 19-11" />
-              <path d="m16 40 16 9 16-9" />
-              <path d="m20 38 12 7 12-7" />
-            </g></svg></span
+        ><span class="brand-mark"><img src="assets/images/image-04-01de86cc6f.png" alt="" aria-hidden="true"></span
         ><span class="brand-name">Alpine floor</span
         ><i class="brand-divider"></i
         ><span class="brand-collection">Коллекция Титан</span></a
@@ -4455,16 +5204,22 @@
     </header>
     <main>
       <section id="top" class="hero titan-hero has-image">
-        <img
-          class="hero-art"
-          src="assets/image-04-4f90453424d6.png"
-          alt="Коллекция Титан — напольное покрытие среди камня"
-        />
+        <video
+          class="hero-art hero-video"
+          autoplay
+          muted
+          playsinline
+          preload="auto"
+          onended="this.pause()"
+          aria-label="Коллекция Титан — видео"
+        >
+          <source src="assets/video/video-01-dca13d7341.mp4" type="video/mp4" />
+        </video>
         <div class="hero-atmosphere"></div>
         <div class="hero-vignette"></div>
         <div class="hero-brand-copy">
           <h1 class="has-rendered-title">
-            <img class="hero-title-render" src="assets/image-05-3a74cd09306e.png" alt="Коллекция Титан" />
+            <img class="hero-title-render" src="assets/images/image-05-d68aa9e4bc.png" alt="Коллекция Титан" />
           </h1>
           <div class="hero-material">
             <i></i><b>Каменно-полимерная плитка SPC</b><i></i>
@@ -4497,7 +5252,28 @@
         <p class="hero-install">
           Укладка возможна замковым<br />и клеевым способом
         </p>
-        <div class="scroll-line"></div>
+                <div class="scroll-line"></div>
+      </section>
+
+      <section class="spec-strip spec-strip-animated">
+        <article class="spec">
+          <strong class="counter" data-from="1" data-to="8">1</strong
+          ><span>максимальная толщина, мм</span>
+        </article>
+        <article class="spec">
+          <strong
+            ><span class="counter" data-from="1" data-to="42">1</span
+            ><small>°C</small></strong
+          ><span>тёплый пол</span>
+        </article>
+        <article class="spec spec-faska">
+          <strong>4V</strong><span>окрашенная фаска</span>
+        </article>
+        <article class="spec spec-fire">
+          <strong>КМ2</strong>
+          <span class="no-fire-icon" aria-hidden="true"><img src="assets/images/image-06-ab2e6c1fe8.png" alt="" /></span>
+          <span>пожаробезопасность</span>
+        </article>
       </section>
       <section class="section intro">
         <div class="intro-copy reveal">
@@ -4511,74 +5287,16 @@
             качества и спокойная сила материала.
           </p>
         </div>
-        <div class="monolith reveal">
-          <div class="orbit"></div>
-          <div class="board"></div>
-        </div>
-      </section>
-      <section class="spec-strip spec-strip-animated">
-        <article class="spec">
-          <strong class="counter" data-from="1" data-to="8">1</strong
-          ><span>максимальная толщина, мм</span>
-        </article>
-        <article class="spec">
-          <strong
-            ><span class="counter" data-from="1" data-to="42">1</span
-            ><small>°C</small></strong
-          ><span>тёплый пол</span>
-        </article>
-        <article class="spec spec-faska">
-          <strong>4V</strong><i class="paint-stroke" aria-hidden="true"></i><span>окрашенная фаска</span>
-        </article>
-        <article class="spec spec-fire">
-          <strong>КМ2</strong>
-          <span class="no-fire-icon" aria-hidden="true"><img src="assets/image-06-aa5283020a01.png" alt="" /></span>
-          <span>пожаробезопасность</span>
-        </article>
-      </section>
-      <section id="technology" class="section technology">
-        <div class="tech-head">
-          <div class="reveal">
-            <div class="section-label">Titan Technology</div>
-            <h2 class="title">Сила —<br />в структуре</h2>
-          </div>
-          <p class="reveal">
-            Каждый слой решает свою задачу: защищает рисунок, воспроизводит
-            живую текстуру, принимает нагрузку и удерживает точность соединения.
-          </p>
-        </div>
-        <div class="laminate-explode reveal" id="titan3d">
-          <div class="three-stage layer-art-stage" id="threeStage" data-static="true">
-            <img src="assets/image-07-29eec9fcb968.png" alt="Слои каменно-полимерного покрытия SPC" />
-          </div>
-          <div class="lam-callout c1">
-            Замковая система<small>Точное и стабильное соединение</small>
-          </div>
-          <div class="lam-callout c2">
-            Фаска с четырёх сторон<small
-              >Выразительная геометрия каждой планки</small
-            >
-          </div>
-          <div class="lam-callout c3">
-            Каменно-полимерная плита SPC<small
-              >Высокая плотность и углеродные нанотрубки</small
-            >
-          </div>
-          <div class="lam-callout c4">
-            Декоративный слой<small>Глубокая натуральная фактура дерева</small>
-          </div>
-          <div class="lam-callout c5">
-            Защитный структурированный слой<small
-              >Прозрачный износостойкий слой ПВХ</small
-            >
-          </div>
-          <div class="lam-callout c6">
-            Полиуретановый защитный слой<small
-              >Защита от ультрафиолета и истирания</small
-            >
+        <div class="monolith engineering-video-stage reveal" id="engineeringVideoStage">
+          <div class="engineering-video-wrap" id="engineeringVideoWrap">
+            <video class="engineering-video" id="engineeringVideo" muted playsinline preload="auto" aria-label="Разложенная структура SPC-планки Титан">
+              <source src="assets/video/video-02-63da64b4b8.mp4" type="video/mp4">
+            </video>
           </div>
         </div>
       </section>
+      
+      
       <section id="collections" class="section collections">
         <div class="collection-heading reveal">
           <h2 class="title">Выбери<br />свой Титан</h2>
@@ -4591,35 +5309,7 @@
         </div>
         <div class="collection-stage reveal" id="collectionStage"></div>
       </section>
-      <section class="features section">
-        <article class="feature reveal">
-          <span class="index">01 / Titan.Shield</span>
-          <div class="ring"></div>
-          <h3>Прочно</h3>
-          <p>
-            Поверхность рассчитана на активную жизнь, бытовые нагрузки и
-            ежедневное движение.
-          </p>
-        </article>
-        <article class="feature reveal">
-          <span class="index">02 / Titan.Lock</span>
-          <div class="ring"></div>
-          <h3>Точно</h3>
-          <p>
-            Замковая система формирует ровное соединение и цельную геометрию
-            пола.
-          </p>
-        </article>
-        <article class="feature reveal">
-          <span class="index">03 / Acoustic comfort</span>
-          <div class="ring"></div>
-          <h3>Тихо</h3>
-          <p>
-            Массивная структура создаёт более спокойное и основательное ощущение
-            под ногами.
-          </p>
-        </article>
-      </section>
+      
       <section id="spaces" class="section rooms">
         <div class="rooms-head">
           <div class="reveal">
@@ -4692,6 +5382,7 @@
       ><span>Титан · каменно-полимерное покрытие SPC</span
       ><a href="#top">Наверх ↑</a>
     </footer>
+    <div class="decor-modal" id="decorModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="decorModalTitle"><div class="decor-modal-panel"><button class="decor-modal-close" type="button" aria-label="Закрыть">×</button><div class="decor-modal-media"><img class="decor-modal-main" id="decorModalMain" alt=""><button class="decor-modal-arrow decor-modal-prev" type="button" aria-label="Предыдущее фото">‹</button><button class="decor-modal-arrow decor-modal-next" type="button" aria-label="Следующее фото">›</button></div><aside class="decor-modal-side"><small>Титан 8 / декор</small><h3 id="decorModalTitle"></h3><div class="decor-modal-code" id="decorModalCode"></div><p>Посмотрите текстуру крупно и переключайтесь между доступными фотографиями декора.</p><div class="decor-modal-thumbs" id="decorModalThumbs"></div><div class="decor-modal-note" id="decorModalNote"></div></aside></div></div>
     <script>console.warn('Scripts "build/three.js" and "build/three.min.js" are deprecated with r150+, and will be removed with r160. Please use ES Modules or alternatives: https://threejs.org/docs/index.html#manual/en/introduction/Installation'),
 /**
  * @license
@@ -4727,18 +5418,81 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
           price: 3880,
         },
       ];
-      const TITAN8_DECORS = [{"name": "Церера", "code": "ECO 27-1-R", "img": "assets/image-08-f7a4fcebe67f.jpg"}, {"name": "Вега", "code": "ECO 27-2-R", "img": "assets/image-09-290da7c00496.jpg"}, {"name": "Сириус", "code": "ECO 27-3-R", "img": "assets/image-10-f95adc66dd4a.jpg"}, {"name": "Арктур", "code": "ECO 27-4-R", "img": "assets/image-11-53c4188cfaa3.jpg"}, {"name": "Орион", "code": "ECO 27-5-R", "img": "assets/image-12-d961a51ed318.jpg"}, {"name": "Осирис", "code": "ECO 27-6-R", "img": "assets/image-13-e4cd86b859d6.jpg"}, {"name": "Каллисто", "code": "ECO 27-7-R", "img": "assets/image-14-901b13b5d530.jpg"}, {"name": "Тритон", "code": "ECO 27-8-R", "img": "assets/image-15-386ead1fdbfb.jpg"}, {"name": "Антарес", "code": "ECO 27-9-R", "img": "assets/image-16-62509f1ca97a.jpg"}, {"name": "Энцелад", "code": "ECO 27-10-R", "img": "assets/image-17-5b14fed6eaf2.jpg"}, {"name": "Широн", "code": "ECO 27-11-R", "img": "assets/image-18-6566ec525024.jpg"}];
+      const TITAN8_DECORS = [{"name": "Церера", "code": "ECO 27-1-R", "img": "assets/images/image-07-cc3ee54a86.jpg"}, {"name": "Вега", "code": "ECO 27-2-R", "img": "assets/images/image-08-c39543b90f.jpg"}, {"name": "Сириус", "code": "ECO 27-3-R", "img": "assets/images/image-09-cc4cd84945.jpg"}, {"name": "Арктур", "code": "ECO 27-4-R", "img": "assets/images/image-10-ac4e90833d.jpg"}, {"name": "Орион", "code": "ECO 27-5-R", "img": "assets/images/image-11-acdc11e24a.jpg"}, {"name": "Осирис", "code": "ECO 27-6-R", "img": "assets/images/image-12-a8b97fd55d.jpg"}, {"name": "Каллисто", "code": "ECO 27-7-R", "img": "assets/images/image-13-fcf1a956f2.jpg"}, {"name": "Тритон", "code": "ECO 27-8-R", "img": "assets/images/image-14-31207a5e6e.jpg"}, {"name": "Антарес", "code": "ECO 27-9-R", "img": "assets/images/image-15-88785f56dc.jpg"}, {"name": "Энцелад", "code": "ECO 27-10-R", "img": "assets/images/image-16-9818079560.jpg"}, {"name": "Широн", "code": "ECO 27-11-R", "img": "assets/images/image-17-5943a823f9.jpg"}];
       const stage = document.querySelector("#collectionStage");
-      const titan8DecorCards = TITAN8_DECORS.map((d) =>
-        `<figure class="titan8-decor-card"><img src="${d.img}" alt="Декор ${d.name} — ${d.code}"><figcaption><strong>${d.name}</strong><span>${d.code}</span></figcaption></figure>`
+      const titan8DecorCards = TITAN8_DECORS.map((d, decorIndex) =>
+        `<figure class="titan8-decor-card" tabindex="0" role="button" data-decor-index="${decorIndex}" onclick="window.openTitanDecor && window.openTitanDecor(${decorIndex})" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();window.openTitanDecor && window.openTitanDecor(${decorIndex})}" aria-label="Открыть декор ${d.name}"><img src="${d.img}" alt="Декор ${d.name} — ${d.code}" draggable="false"><figcaption><strong>${d.name}</strong><span>${d.code}</span></figcaption></figure>`
       ).join("");
       stage.innerHTML = C.map((c, i) => {
         if (i === 0) {
-          return `<article class="slide titan8-decor-slide active"><div class="titan8-decor-head"><div><small>11 декоров · коллекция Титан 8</small><h3>Все оттенки коллекции «Титан 8» — от светлых спокойных древесных тонов до более насыщенных и глубоких.</h3></div></div><div class="titan8-decor-grid">${titan8DecorCards}</div><div class="titan8-decor-actions"><a class="titan8-detail-link" href="titan-8.html">Подробнее изучить коллекцию <b>↗</b></a></div></article>`;
+          return `<article class="slide titan8-decor-slide active"><div class="titan8-product-shell"><div class="titan8-one-screen"><section class="titan8-info-compact"><div class="titan8-keyfacts"><div class="titan8-keyfact"><b>8 мм</b><span>Толщина</span></div><div class="titan8-keyfact"><b>42°</b><span>Тёплый пол</span></div><div class="titan8-keyfact"><b>100%</b><span>Влагостойкость</span></div><div class="titan8-keyfact"><b>30 лет</b><span>Срок службы</span></div></div><div class="titan8-compact-specs"><div class="titan8-compact-spec"><span>Размер</span><b>1220 × 183 × 8 мм</b></div><div class="titan8-compact-spec"><span>Основа</span><b>SPC</b></div><div class="titan8-compact-spec"><span>Фаска</span><b>4V, крашеная</b></div><div class="titan8-compact-spec"><span>Тиснение</span><b>Фактура натурального дерева</b></div><div class="titan8-compact-spec"><span>Укладка</span><b>Замковая / клеевая</b></div><div class="titan8-compact-spec"><span>Замок</span><b>Кликовый</b></div><div class="titan8-compact-spec"><span>Поверхность</span><b>Матовая</b></div><div class="titan8-compact-spec"><span>Формальдегиды</span><b>Отсутствуют</b></div></div></section><section class="titan8-decor-side"><div class="titan8-decor-section-head"><h4>11 декоров</h4><p>Нажмите на декор — откроется крупная галерея.</p></div><div class="titan8-decor-grid">${titan8DecorCards}</div></section></div></div></article>`;
         }
         return `<article class="slide"><img src="${c.img}" alt="${c.name} Alpine Floor"><div class="slide-copy"><span class="num">0${i + 1} / ${c.tag}</span><h3>${c.name}</h3><p>${c.text}</p><a class="btn" href="#calculator" data-calc="${i}">Рассчитать <b>↓</b></a></div></article>`;
       }).join("");
       stage.classList.add("has-decor-grid");
+
+
+      // Дополнительные интерьерные визуализации для декора ECO 27-11-R (Широн)
+      {
+        const decor2711 = TITAN8_DECORS.find(d => d.code === "ECO 27-11-R");
+        if (decor2711) {
+          decor2711.gallery = [
+            decor2711.img,
+            "assets/images/image-18-83fda500fb.jpg",
+            "assets/images/image-19-4d1a60ba47.jpg",
+            "assets/images/image-20-5625a0a036.jpg",
+            "assets/images/image-21-4db6b1ee3e.jpg"
+          ];
+        }
+      }
+
+      // Popup gallery for Titan 8 decors. Add `gallery: [url1, url2, ...]` to a decor object to show more photos.
+      const decorModal = document.getElementById("decorModal");
+      const decorModalMain = document.getElementById("decorModalMain");
+      const decorModalTitle = document.getElementById("decorModalTitle");
+      const decorModalCode = document.getElementById("decorModalCode");
+      const decorModalThumbs = document.getElementById("decorModalThumbs");
+      const decorModalNote = document.getElementById("decorModalNote");
+      let activeDecorIndex = 0;
+      let activeDecorPhoto = 0;
+      function decorGallery(d){ return Array.isArray(d.gallery) && d.gallery.length ? d.gallery : [d.img]; }
+      function renderDecorModal(){
+        const d = TITAN8_DECORS[activeDecorIndex];
+        const gallery = decorGallery(d);
+        activeDecorPhoto = Math.max(0, Math.min(activeDecorPhoto, gallery.length - 1));
+        decorModalMain.src = gallery[activeDecorPhoto];
+        decorModalMain.alt = `Декор ${d.name} — фото ${activeDecorPhoto + 1}`;
+        decorModalTitle.textContent = d.name;
+        decorModalCode.textContent = d.code;
+        decorModalThumbs.innerHTML = gallery.map((src,i)=>`<button class="decor-modal-thumb ${i===activeDecorPhoto?'active':''}" data-decor-photo="${i}" type="button"><img src="${src}" alt="${d.name}, фото ${i+1}"></button>`).join('');
+        decorModalNote.textContent = gallery.length === 1 ? 'Сейчас в исходных данных есть одно фото этого декора. При добавлении дополнительных изображений они автоматически появятся здесь.' : `${gallery.length} фотографий декора`;
+        decorModal.querySelectorAll('[data-decor-photo]').forEach(btn=>btn.onclick=()=>{activeDecorPhoto=+btn.dataset.decorPhoto;renderDecorModal();});
+        const arrowsVisible = gallery.length > 1;
+        decorModal.querySelector('.decor-modal-prev').style.display = arrowsVisible ? '' : 'none';
+        decorModal.querySelector('.decor-modal-next').style.display = arrowsVisible ? '' : 'none';
+      }
+      function openDecorModal(index){ activeDecorIndex=index; activeDecorPhoto=0; renderDecorModal(); decorModal.classList.add('open'); decorModal.setAttribute('aria-hidden','false'); document.body.classList.add('decor-modal-open'); decorModal.querySelector('.decor-modal-close').focus(); }
+      window.openTitanDecor = openDecorModal;
+      function closeDecorModal(){ decorModal.classList.remove('open'); decorModal.setAttribute('aria-hidden','true'); document.body.classList.remove('decor-modal-open'); }
+      // Делегирование событий: карточки остаются кликабельными даже после повторного рендера вкладки.
+      stage.addEventListener('click', e => {
+        const card = e.target.closest('.titan8-decor-card');
+        if (!card || !stage.contains(card)) return;
+        openDecorModal(+card.dataset.decorIndex);
+      });
+      stage.addEventListener('keydown', e => {
+        const card = e.target.closest('.titan8-decor-card');
+        if (!card || !stage.contains(card)) return;
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openDecorModal(+card.dataset.decorIndex);
+        }
+      });
+      decorModal.querySelector('.decor-modal-close').onclick=closeDecorModal;
+      decorModal.addEventListener('click',e=>{if(e.target===decorModal)closeDecorModal();});
+      decorModal.querySelector('.decor-modal-prev').onclick=()=>{const g=decorGallery(TITAN8_DECORS[activeDecorIndex]);activeDecorPhoto=(activeDecorPhoto-1+g.length)%g.length;renderDecorModal();};
+      decorModal.querySelector('.decor-modal-next').onclick=()=>{const g=decorGallery(TITAN8_DECORS[activeDecorIndex]);activeDecorPhoto=(activeDecorPhoto+1)%g.length;renderDecorModal();};
+      document.addEventListener('keydown',e=>{if(!decorModal.classList.contains('open'))return;if(e.key==='Escape')closeDecorModal();if(e.key==='ArrowLeft')decorModal.querySelector('.decor-modal-prev').click();if(e.key==='ArrowRight')decorModal.querySelector('.decor-modal-next').click();});
       document.querySelectorAll("[data-slide]").forEach(
         (b) =>
           (b.onclick = () => {
@@ -4751,11 +5505,11 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
           }),
       );
       const rooms = [
-        ["Гостиная", "assets/image-19-2ec4a29b31b2.jpg"],
-        ["Детская", "assets/image-20-71e6ccdad3cb.jpg"],
-        ["Кухня", "assets/image-21-76e29c3fe396.jpg"],
-        ["Коридор", "assets/image-22-e0b0feb71f01.jpg"],
-        ["Спальня", "assets/image-23-9865ca04c62c.jpg"],
+        ["Гостиная", "assets/images/image-22-0945b948a4.jpg"],
+        ["Детская", "assets/images/image-23-26929ba7bf.jpg"],
+        ["Кухня", "assets/images/image-24-f3804c8b43.jpg"],
+        ["Коридор", "assets/images/image-25-c5bc5e5cd5.jpg"],
+        ["Спальня", "assets/images/image-26-a1d53fbad4.jpg"],
       ]
       const roomHtml = rooms
         .map(
@@ -5129,6 +5883,303 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
         } else {
           initSpecExtras();
         }
+      })();
+    </script>
+
+    <script id="hero-dust-effect-script">
+      (function () {
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        function initHeroDust() {
+          const hero = document.querySelector('.titan-hero');
+          const canvas = hero && hero.querySelector('.hero-dust-canvas');
+          if (!hero || !canvas) return;
+          const ctx = canvas.getContext('2d');
+          if (!ctx) return;
+
+          let dpr = Math.min(window.devicePixelRatio || 1, 2);
+          let width = 0;
+          let height = 0;
+          let particles = [];
+          let motes = [];
+          let raf = null;
+          let loopStarted = false;
+          let last = performance.now();
+
+          function resize() {
+            const rect = hero.getBoundingClientRect();
+            width = Math.max(1, Math.round(rect.width));
+            height = Math.max(1, Math.round(rect.height));
+            canvas.width = Math.round(width * dpr);
+            canvas.height = Math.round(height * dpr);
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            seedMotes();
+          }
+
+          function seedMotes() {
+            motes = [];
+            const total = width < 768 ? 18 : 28;
+            for (let i = 0; i < total; i++) {
+              motes.push({
+                x: Math.random() * width,
+                y: height * (0.38 + Math.random() * 0.5),
+                r: 0.8 + Math.random() * 2.6,
+                vx: 0.02 + Math.random() * 0.08,
+                vy: -0.005 - Math.random() * 0.05,
+                a: 0.06 + Math.random() * 0.1,
+                pulse: Math.random() * Math.PI * 2
+              });
+            }
+          }
+
+          function impactPoint() {
+            return {
+              x: width * (width < 900 ? 0.54 : 0.6),
+              y: height * (width < 900 ? 0.83 : 0.79)
+            };
+          }
+
+          function spawnBurst(power) {
+            const p = impactPoint();
+            const count = width < 768 ? 55 : 85;
+            for (let i = 0; i < count; i++) {
+              const angle = (-Math.PI * 0.98) + Math.random() * (Math.PI * 0.96);
+              const speed = (0.45 + Math.random() * 2.6) * power;
+              const lift = 0.55 + Math.random() * 1.1;
+              const size = 1.8 + Math.random() * (width < 768 ? 6 : 9);
+              particles.push({
+                x: p.x + (Math.random() - 0.5) * 42,
+                y: p.y + (Math.random() - 0.5) * 12,
+                vx: Math.cos(angle) * speed * (1.1 + Math.random() * 0.3),
+                vy: Math.sin(angle) * speed * lift - Math.random() * 1.8,
+                g: 0.018 + Math.random() * 0.032,
+                life: 56 + Math.random() * 40,
+                maxLife: 56 + Math.random() * 40,
+                r: size,
+                stretch: 0.6 + Math.random() * 1.3,
+                drift: (Math.random() - 0.5) * 0.018,
+                tone: 160 + Math.random() * 52,
+                alpha: 0.18 + Math.random() * 0.22
+              });
+            }
+            for (let i = 0; i < Math.round(count * 0.22); i++) {
+              particles.push({
+                x: p.x + (Math.random() - 0.5) * 26,
+                y: p.y - Math.random() * 8,
+                vx: (Math.random() - 0.5) * 3.5 * power,
+                vy: -0.35 - Math.random() * 1.1 * power,
+                g: 0.011 + Math.random() * 0.02,
+                life: 80 + Math.random() * 60,
+                maxLife: 80 + Math.random() * 60,
+                r: 0.9 + Math.random() * 2.1,
+                stretch: 0.3 + Math.random() * 0.6,
+                drift: (Math.random() - 0.5) * 0.02,
+                tone: 190 + Math.random() * 35,
+                alpha: 0.22 + Math.random() * 0.25
+              });
+            }
+          }
+
+          function animate(now) {
+            const dt = Math.min(2.2, (now - last) / 16.6667);
+            last = now;
+            ctx.clearRect(0, 0, width, height);
+
+            for (let i = 0; i < motes.length; i++) {
+              const m = motes[i];
+              m.x += m.vx * dt;
+              m.y += m.vy * dt;
+              m.pulse += 0.03 * dt;
+              if (m.x > width + 12) m.x = -10;
+              if (m.y < height * 0.34) m.y = height * (0.7 + Math.random() * 0.18);
+              ctx.beginPath();
+              ctx.fillStyle = 'rgba(226, 214, 196,' + (m.a + Math.sin(m.pulse) * 0.02) + ')';
+              ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+              ctx.fill();
+            }
+
+            for (let i = particles.length - 1; i >= 0; i--) {
+              const p = particles[i];
+              p.life -= dt;
+              if (p.life <= 0) {
+                particles.splice(i, 1);
+                continue;
+              }
+              p.vx += p.drift * dt;
+              p.vy += p.g * dt;
+              p.x += p.vx * dt;
+              p.y += p.vy * dt;
+              const lifeT = p.life / p.maxLife;
+              const alpha = p.alpha * Math.pow(lifeT, 1.35);
+              const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * (1.7 + p.stretch));
+              grad.addColorStop(0, 'rgba(' + p.tone + ',' + (p.tone - 8) + ',' + (p.tone - 18) + ',' + alpha + ')');
+              grad.addColorStop(0.55, 'rgba(' + (p.tone - 18) + ',' + (p.tone - 22) + ',' + (p.tone - 28) + ',' + (alpha * 0.55) + ')');
+              grad.addColorStop(1, 'rgba(90, 84, 72, 0)');
+              ctx.beginPath();
+              ctx.fillStyle = grad;
+              ctx.ellipse(p.x, p.y, p.r * (1.6 + p.stretch * 0.5), p.r * (0.8 + p.stretch), Math.atan2(p.vy, p.vx), 0, Math.PI * 2);
+              ctx.fill();
+            }
+
+            raf = requestAnimationFrame(animate);
+          }
+
+          resize();
+          if (!loopStarted) {
+            loopStarted = true;
+            raf = requestAnimationFrame(animate);
+            setTimeout(function () { spawnBurst(1); }, 1750);
+            setTimeout(function () { spawnBurst(0.42); }, 2180);
+            setInterval(function () { spawnBurst(0.36); }, 9000);
+          }
+          window.addEventListener('resize', resize, { passive: true });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initHeroDust);
+        } else {
+          initHeroDust();
+        }
+      })();
+    </script>
+
+<script id="heading-size-minus-10">
+(function(){
+  const selector = 'h1, h2, h3, .title';
+  function applyHeadingScale(){
+    const els = Array.from(new Set(document.querySelectorAll(selector)));
+    els.forEach(el => {
+      el.style.removeProperty('font-size');
+    });
+    requestAnimationFrame(() => {
+      els.forEach(el => {
+        const size = parseFloat(getComputedStyle(el).fontSize);
+        if (Number.isFinite(size)) el.style.setProperty('font-size', (size * 0.9) + 'px', 'important');
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', applyHeadingScale);
+  else applyHeadingScale();
+  let t;
+  window.addEventListener('resize', () => {
+    clearTimeout(t);
+    t = setTimeout(applyHeadingScale, 120);
+  });
+})();
+</script>
+
+
+    <script>
+      (() => {
+        const stage = document.getElementById('engineeringVideoStage');
+        const video = document.getElementById('engineeringVideo');
+        if (!stage || !video) return;
+
+        let duration = 0;
+        let ready = false;
+
+        // Позиция курсора: target — куда хотим прийти,
+        // smooth — куда дошли после инерционного сглаживания.
+        let targetP = 0.5;
+        let smoothP = 0.5;
+
+        // Таймкод тоже сглаживаем отдельно — это убирает резкие seek-прыжки.
+        let targetTime = 0;
+        let smoothTime = 0;
+
+        let raf = 0;
+        let lastSeekAt = 0;
+
+        const EDGE_PAD = 0.025;
+
+        // Чем меньше значение, тем мягче/инерционнее движение.
+        const POINTER_EASE = 0.085;
+        const TIME_EASE = 0.16;
+
+        // Не заставляем браузер декодировать новый кадр 60 раз/сек:
+        // около 30 seek-обновлений/сек обычно заметно плавнее для MP4.
+        const SEEK_INTERVAL = 1000 / 30;
+
+        function clamp(v, a, b) {
+          return Math.max(a, Math.min(b, v));
+        }
+
+        function pointerToP(clientX) {
+          const r = stage.getBoundingClientRect();
+          let p = (clientX - r.left) / r.width;
+          p = clamp(p, 0, 1);
+          return EDGE_PAD + p * (1 - EDGE_PAD * 2);
+        }
+
+        function animate(now) {
+          // Сначала инерционно двигаем виртуальный курсор.
+          smoothP += (targetP - smoothP) * POINTER_EASE;
+
+          // Потом отдельно сглаживаем таймкод.
+          targetTime = smoothP * duration;
+          smoothTime += (targetTime - smoothTime) * TIME_EASE;
+
+          if (ready && now - lastSeekAt >= SEEK_INTERVAL) {
+            // Маленький dead-zone, чтобы не запускать лишние seek.
+            if (Math.abs(video.currentTime - smoothTime) > 0.006) {
+              try {
+                video.currentTime = clamp(smoothTime, 0, duration);
+              } catch (_) {}
+            }
+            lastSeekAt = now;
+          }
+
+          const moving =
+            Math.abs(targetP - smoothP) > 0.0002 ||
+            Math.abs(targetTime - smoothTime) > 0.0015;
+
+          if (moving) {
+            raf = requestAnimationFrame(animate);
+          } else {
+            raf = 0;
+          }
+        }
+
+        function kick() {
+          if (!raf) raf = requestAnimationFrame(animate);
+        }
+
+        function init() {
+          duration = Number(video.duration) || 0;
+          if (!duration || !Number.isFinite(duration)) return;
+
+          ready = true;
+          video.pause();
+
+          targetP = smoothP = 0.5;
+          targetTime = smoothTime = duration * 0.5;
+
+          try { video.currentTime = smoothTime; } catch (_) {}
+        }
+
+        if (video.readyState >= 1) init();
+        else video.addEventListener('loadedmetadata', init, { once: true });
+
+        stage.addEventListener('pointermove', (e) => {
+          if (!ready) return;
+          targetP = pointerToP(e.clientX);
+          kick();
+        });
+
+        // Не сбрасываем мгновенно — объект спокойно доплывает в центр.
+        stage.addEventListener('pointerleave', () => {
+          if (!ready) return;
+          targetP = 0.5;
+          kick();
+        });
+
+        stage.addEventListener('touchmove', (e) => {
+          if (!ready || !e.touches[0]) return;
+          targetP = pointerToP(e.touches[0].clientX);
+          kick();
+        }, { passive: true });
       })();
     </script>
 </body>
